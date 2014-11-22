@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <MinimumVisualStudioVersion>10.0</MinimumVisualStudioVersion>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{70ED032B-695A-4E16-B7C0-88C697439C20}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FreeSharp</RootNamespace>
+    <AssemblyName>FreeSharp</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TargetFrameworkProfile>Profile111</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <NuGetPackageImportStamp>0c899e7c</NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Client\Configuration.cs" />
+    <Compile Include="Client\CompanyExtensions.cs" />
+    <Compile Include="Client\FreeAgentException.cs" />
+    <Compile Include="Client\ContactExtensions.cs" />
+    <Compile Include="Client\ProjectExtensions.cs" />
+    <Compile Include="Client\InvoiceExtensions.cs" />
+    <Compile Include="Client\BankAccountExtensions.cs" />
+    <Compile Include="Client\FreeAgentClient.cs" />
+    <Compile Include="Helpers\DeliminatorSeparatedPropertyNamesContractResolver - Copy.cs" />
+    <Compile Include="Helpers\IsoDateConverter.cs" />
+    <Compile Include="Helpers\StringExtensions.cs" />
+    <Compile Include="Interfaces\IUrl.cs" />
+    <Compile Include="Interfaces\IFreeAgentApi.cs" />
+    <Compile Include="Model\AccessRequest.cs" />
+    <Compile Include="Model\AccessResponse.cs" />
+    <Compile Include="Model\Accounting.cs" />
+    <Compile Include="Model\BankTransaction.cs" />
+    <Compile Include="Model\BankAccount.cs" />
+    <Compile Include="Model\Attachment.cs" />
+    <Compile Include="Model\Bill.cs" />
+    <Compile Include="Model\Category.cs" />
+    <Compile Include="Model\InvoiceEmail.cs" />
+    <Compile Include="Model\TaxTimeline.cs" />
+    <Compile Include="Model\Company.cs" />
+    <Compile Include="Model\Contact.cs" />
+    <Compile Include="Model\Expense.cs" />
+    <Compile Include="Model\Invoice.cs" />
+    <Compile Include="Model\Project.cs" />
+    <Compile Include="Model\TaskItem.cs" />
+    <Compile Include="Model\Timeslip.cs" />
+    <Compile Include="Model\User.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RefitStubs.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>packages\Newtonsoft.Json.6.0.5\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Refit">
+      <HintPath>packages\refit.2.0.2\lib\Portable-Net45+WinRT45+WP8+WPA81\Refit.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <Import Project="packages\refit.2.0.2\build\refit.targets" Condition="Exists('packages\refit.2.0.2\build\refit.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\refit.2.0.2\build\refit.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\refit.2.0.2\build\refit.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
