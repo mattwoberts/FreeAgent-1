@@ -10,11 +10,11 @@ namespace FreeAgent
     {
         public static async Task<List<BankAccount>> GetBankAccountsAsync(this FreeAgentClient client, BankAccountViewFilter viewFilter = null)
         {
-            var result = await client.Execute(async c =>
-            {
-                var filter = viewFilter ?? BankAccountViewFilter.All();
+            var filter = viewFilter ?? BankAccountViewFilter.All();
 
-                return await c.BankAccountList(client.Configuration.CurrentHeader, filter.FilterValue);
+            var result = await client.Execute(c =>
+            {
+                return c.BankAccountList(client.Configuration.CurrentHeader, filter.FilterValue);
             });
 
             return result.BankAccounts;
@@ -22,10 +22,11 @@ namespace FreeAgent
 
         public static async Task<BankAccount> GetBankAccountAsync(this FreeAgentClient client, Uri url)
         {
-            var result = await client.Execute(async c =>
+            var id = client.ExtractId(url);
+
+            var result = await client.Execute(c =>
             {
-                var id = client.ExtractId(url);
-                return await client.Client.BankAccount(client.Configuration.CurrentHeader, id);
+                return c.BankAccount(client.Configuration.CurrentHeader, id);
             });
 
             return result.BankAccount;
@@ -33,9 +34,9 @@ namespace FreeAgent
 
         public static async Task<BankAccount> GetBankAccountAsync(this FreeAgentClient client, int accountId)
         {
-            var result = await client.Execute(async c =>
+            var result = await client.Execute(c =>
             {
-                return await client.Client.BankAccount(client.Configuration.CurrentHeader, accountId);
+                return c.BankAccount(client.Configuration.CurrentHeader, accountId);
             });
 
             return result.BankAccount;
@@ -44,11 +45,9 @@ namespace FreeAgent
         public static async Task<BankAccount> CreateBankAccountAsync(this FreeAgentClient client, BankAccount account)
         {
             //TODO - safety stuff here...
-            var result = await client.Execute(async c =>
+            var result = await client.Execute(c =>
             {
-                var source = new BankAccountWrapper { BankAccount = account };
-
-                return await client.Client.CreateBankAccount(client.Configuration.CurrentHeader, source);
+                return c.CreateBankAccount(client.Configuration.CurrentHeader, account.Wrap());
             });
 
             return result.BankAccount;
@@ -56,17 +55,20 @@ namespace FreeAgent
 
         public static async Task<bool> DeleteBankAccountAsync(this FreeAgentClient client, BankAccount account)
         {
-            var result = await client.Execute(async c =>
+            var id = client.ExtractId(account);
+
+            await client.Execute(c =>
             {
                 //TODO - safety stuff here??
-
-                var id = client.ExtractId(account);
-
-                await client.Client.DeleteBankAccount(client.Configuration.CurrentHeader, id);
-                return true;
+                return c.DeleteBankAccount(client.Configuration.CurrentHeader, id);
             });
 
             return true;
+        }
+
+        internal static BankAccountWrapper Wrap(this BankAccount account)
+        {
+            return new BankAccountWrapper { BankAccount = account };
         }
     }
 

@@ -38,11 +38,11 @@ namespace FreeAgent
             if (httpClient != null)
             {
                 httpClient.BaseAddress = new Uri(rootUrl);
-                this.Client = RestService.For<IFreeAgentApi>(httpClient);
+                this.FreeAgentApi = RestService.For<IFreeAgentApi>(httpClient);
             }
             else
             {
-                this.Client = RestService.For<IFreeAgentApi>(rootUrl);
+                this.FreeAgentApi = RestService.For<IFreeAgentApi>(rootUrl);
             }
         }
 
@@ -51,7 +51,7 @@ namespace FreeAgent
             try
             {
                 await RenewAccessIfRequired();
-                await action(this.Client);
+                await action(this.FreeAgentApi);
             }
             catch (FreeAgentException)
             {
@@ -68,7 +68,7 @@ namespace FreeAgent
             try
             {
                 await RenewAccessIfRequired();
-                return await action(this.Client);
+                return await action(this.FreeAgentApi);
             }
             catch (FreeAgentException)
             {
@@ -80,7 +80,7 @@ namespace FreeAgent
             }
         }
 
-        internal async Task<IFreeAgentApi> RenewAccessIfRequired()
+        internal async Task RenewAccessIfRequired()
         {
             var tryRenewal = false;
             var currentDate = DateTime.UtcNow; 
@@ -96,7 +96,7 @@ namespace FreeAgent
             }
 
             if (!tryRenewal)
-                return this.Client;
+                return;
 
             // got to try renewing the token
             var request = new AccessRequest
@@ -107,12 +107,10 @@ namespace FreeAgent
                  RefreshToken = this.Configuration.RefreshToken
             };
 
-            var response = await this.Client.RefreshAccessToken(request);
+            var response = await this.FreeAgentApi.RefreshAccessToken(request);
 
             this.Configuration.CurrentToken = response.AccessToken;
             this.Configuration.CurrentTokenExpiry = currentDate.AddSeconds(response.ExpiresIn);
-
-            return this.Client;
         }
 
         internal int ExtractId(IUrl model)
@@ -139,7 +137,6 @@ namespace FreeAgent
         }
 
         public Configuration Configuration { get; private set;  }
-        internal IFreeAgentApi Client { get; set; }
-
+        private IFreeAgentApi FreeAgentApi { get; set; }
     }
 }

@@ -8,7 +8,11 @@ namespace FreeAgent
     {
         public static async Task<List<Project>> GetProjectsAsync(this FreeAgentClient client, ProjectViewFilter invoiceFilter = null)
         {
-            var result = await client.Client.GetProjectList(client.Configuration.CurrentHeader, invoiceFilter.FilterValue);
+            var result = await client.Execute(c =>
+            {
+                return c.GetProjectList(client.Configuration.CurrentHeader, invoiceFilter.FilterValue);
+            });
+
             return result.Projects;
         }
     }

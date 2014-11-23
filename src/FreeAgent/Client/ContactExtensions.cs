@@ -9,10 +9,9 @@ namespace FreeAgent
     {
         public static async Task<List<Contact>> GetContactsAsync(this FreeAgentClient client, ContactViewFilter filter = null)
         {
+            var myFilter = filter ?? ContactViewFilter.All();
             var result = await client.Execute(c =>
             {
-                var myFilter = filter ?? ContactViewFilter.All();
-
                 return c.GetContactList(client.Configuration.CurrentHeader, myFilter.FilterValue, myFilter.SortValue);
             });
 
@@ -23,9 +22,7 @@ namespace FreeAgent
         {
             var result = await client.Execute(c =>
             {
-                var source = new ContactWrapper { Contact = contact };
-
-                return c.CreateContact(client.Configuration.CurrentHeader, source);
+                return c.CreateContact(client.Configuration.CurrentHeader, contact.Wrap());
             });
 
             return result.Contact;
@@ -33,10 +30,10 @@ namespace FreeAgent
 
         public static async Task<Contact> GetContactAsync(this FreeAgentClient client, Uri url)
         {
+            var id = client.ExtractId(url);
             var result = await client.Execute(c =>
             {
-                var id = client.ExtractId(url);
-                return client.Client.GetContact(client.Configuration.CurrentHeader, id);
+                return c.GetContact(client.Configuration.CurrentHeader, id);
             });
 
             return result.Contact;
@@ -46,7 +43,7 @@ namespace FreeAgent
         {
             var result = await client.Execute(c =>
             {
-                return client.Client.GetContact(client.Configuration.CurrentHeader, accountId);
+                return c.GetContact(client.Configuration.CurrentHeader, accountId);
             });
 
             return result.Contact;
@@ -54,21 +51,18 @@ namespace FreeAgent
 
         public static async Task<bool> DeleteContactAsync(this FreeAgentClient client, Contact contact)
         {
-            var result = await client.Execute(async c =>
-            {
-                //TODO - safety stuff here??
+            var id = client.ExtractId(contact);
 
-                var id = client.ExtractId(contact);
-
-                await client.Client.DeleteContact(client.Configuration.CurrentHeader, id);
-                return true;
-            });
+            await client.Execute(c => c.DeleteContact(client.Configuration.CurrentHeader, id));
 
             return true;
         }
 
+        internal static ContactWrapper Wrap(this Contact contact)
+        {
+            return new ContactWrapper { Contact = contact };
+        }
     }
-
 
     //TODO - sort value
 

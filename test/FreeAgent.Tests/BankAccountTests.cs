@@ -120,7 +120,7 @@ namespace FreeAgent.Tests
             if (item != null)
             {
                 var exResult = Helper.RecordException(() => this.Client.DeleteBankAccountAsync(item));
-
+ 
                 // assert - but only if we had a primary account
                 // - we should have the same number of accounts
                 // - we should have got an exception saying 209 conflict.

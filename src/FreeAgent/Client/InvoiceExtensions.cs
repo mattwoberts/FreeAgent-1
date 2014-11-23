@@ -10,23 +10,31 @@ namespace FreeAgent
         public static async Task<List<Invoice>> GetInvoicesAsync(this FreeAgentClient client, InvoiceViewFilter invoiceFilter = null)
         {
             var filter = invoiceFilter ?? InvoiceViewFilter.RecentOpenOrOverdue();
-            
-            var result = await client.Client.GetInvoiceList(client.Configuration.CurrentHeader, filter.FilterValue);
+            var result = await client.Execute(c =>
+            {
+                return c.GetInvoiceList(client.Configuration.CurrentHeader, filter.FilterValue);
+            });
+
             return result.Invoices;
         }
 
         public static async Task<Invoice> CreateInvoice(this FreeAgentClient client, Invoice invoice)
         {
-            var result = await client.Client.PostInvoice(client.Configuration.CurrentHeader, invoice);
+            var result = await client.Execute(c =>
+            {
+                return c.PostInvoice(client.Configuration.CurrentHeader, invoice);
+            });
+
             return result.Invoice;
         }
 
         public static async Task<bool> SendInvoice(this FreeAgentClient client, Invoice invoice)
         {
+            var id = client.ExtractId(invoice);
+
             await client.Execute(c =>
             {
-                var id = client.ExtractId(invoice);
-                return client.Client.PutInvoiceStatus(client.Configuration.CurrentHeader, id, "mark_as_sent");
+                return c.PutInvoiceStatus(client.Configuration.CurrentHeader, id, "mark_as_sent");
             });
 
             return true;
@@ -34,10 +42,11 @@ namespace FreeAgent
 
         public static async Task<bool> CancelInvoice(this FreeAgentClient client, Invoice invoice)
         {
+            var id = client.ExtractId(invoice);
+
             await client.Execute(c =>
             {
-                var id = client.ExtractId(invoice);
-                return client.Client.PutInvoiceStatus(client.Configuration.CurrentHeader, id, "mark_as_cancelled");
+                return c.PutInvoiceStatus(client.Configuration.CurrentHeader, id, "mark_as_cancelled");
             });
 
             return true;
@@ -45,10 +54,11 @@ namespace FreeAgent
 
         public static async Task<bool> ScheduleInvoice(this FreeAgentClient client, Invoice invoice)
         {
+            var id = client.ExtractId(invoice);
+
             await client.Execute(c =>
             {
-                var id = client.ExtractId(invoice);
-                return client.Client.PutInvoiceStatus(client.Configuration.CurrentHeader, id, "mark_as_scheduled");
+                return c.PutInvoiceStatus(client.Configuration.CurrentHeader, id, "mark_as_scheduled");
             });
 
             return true;
@@ -56,10 +66,11 @@ namespace FreeAgent
 
         public static async Task<bool> MakeDraftInvoice(this FreeAgentClient client, Invoice invoice)
         {
+            var id = client.ExtractId(invoice);
+
             await client.Execute(c =>
             {
-                var id = client.ExtractId(invoice);
-                return client.Client.PutInvoiceStatus(client.Configuration.CurrentHeader, id, "mark_as_draft");
+                return c.PutInvoiceStatus(client.Configuration.CurrentHeader, id, "mark_as_draft");
             });
 
             return true;
