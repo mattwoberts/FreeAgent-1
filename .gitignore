@@ -98,7 +98,8 @@ _TeamCity*
 # NCrunch
 _NCrunch_*
 .*crunch*.local.xml
-.ncrunchsolution
+*.ncrunchproject
+*.ncrunchsolution
 
 # MightyMoose
 *.mm.*
@@ -182,3 +183,4 @@ UpgradeLog*.htm
 
 # Microsoft Fakes
 FakesAssemblies/
+
