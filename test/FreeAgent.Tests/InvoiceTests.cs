@@ -46,7 +46,7 @@ namespace FreeAgent.Tests
 
             };
 
-            var result = this.Client.CreateInvoice(invoice);
+            var result = await this.Client.CreateInvoice(invoice);
         }
 
         [Test]

@@ -15,7 +15,7 @@
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TargetFrameworkProfile>Profile111</TargetFrameworkProfile>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <NuGetPackageImportStamp>0c899e7c</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>10502b63</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -35,14 +35,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Client\Configuration.cs" />
-    <Compile Include="Client\CompanyExtensions.cs" />
-    <Compile Include="Client\FreeAgentException.cs" />
-    <Compile Include="Client\ContactExtensions.cs" />
-    <Compile Include="Client\ProjectExtensions.cs" />
-    <Compile Include="Client\InvoiceExtensions.cs" />
-    <Compile Include="Client\BankAccountExtensions.cs" />
-    <Compile Include="Client\FreeAgentClient.cs" />
+    <Compile Include="Configuration.cs" />
+    <Compile Include="Extensions\CompanyExtensions.cs" />
+    <Compile Include="Extensions\FreeAgentException.cs" />
+    <Compile Include="Extensions\ContactExtensions.cs" />
+    <Compile Include="Extensions\ProjectExtensions.cs" />
+    <Compile Include="Extensions\InvoiceExtensions.cs" />
+    <Compile Include="Extensions\BankAccountExtensions.cs" />
+    <Compile Include="FreeAgentClient.cs" />
     <Compile Include="Helpers\DeliminatorSeparatedPropertyNamesContractResolver - Copy.cs" />
     <Compile Include="Helpers\IsoDateConverter.cs" />
     <Compile Include="Helpers\StringExtensions.cs" />
@@ -71,14 +71,16 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>packages\Newtonsoft.Json.6.0.5\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\packages\Newtonsoft.Json.6.0.6\lib\portable-net45+wp80+win8+wpa81+aspnetcore50\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Refit">
-      <HintPath>packages\refit.2.0.2\lib\Portable-Net45+WinRT45+WP8+WPA81\Refit.dll</HintPath>
+      <HintPath>..\..\packages\refit.2.1.0\lib\Portable-Net45+WinRT45+WP8+WPA81\Refit.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="packages\refit.2.0.2\build\refit.targets" Condition="Exists('packages\refit.2.0.2\build\refit.targets')" />
@@ -87,7 +89,9 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('packages\refit.2.0.2\build\refit.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\refit.2.0.2\build\refit.targets'))" />
+    <Error Condition="!Exists('..\..\packages\refit.2.1.0\build\refit.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\refit.2.1.0\build\refit.targets'))" />
   </Target>
+  <Import Project="..\..\packages\refit.2.1.0\build\refit.targets" Condition="Exists('..\..\packages\refit.2.1.0\build\refit.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
