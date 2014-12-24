@@ -22,7 +22,7 @@ namespace FreeAgent.Model
 		public double ExchangeRate { get; set; }
 		public int PaymentTermsInDays { get; set; }
 		public string Currency { get; set; }
-		public InvoiceECStatus EcStatus { get; set; } // should be an enum
+		public InvoiceECStatus EcStatus { get; set; } 
 		public DateTime WrittenOffDate { get; set; }
 		public double NetValue { get; set; }
 		public double SalesTaxValue { get; set; }
@@ -45,40 +45,6 @@ namespace FreeAgent.Model
 		public double SalesTaxRate { get; set; }
 		public double SecondSalesTaxRate { get; set; }
 		public Uri Category { get; set; }
-	}
-
-	public enum InvoiceStatus
-	{
-        [EnumMember(Value = "Draft")] Draft,
-		[EnumMember(Value = "Scheduled")] Scheduled,
-		[EnumMember(Value = "Sent")] Sent,
-		[EnumMember(Value = "Cancelled")] Cancelled 
-	}
-
-	public enum InvoiceECStatus
-	{
-        [EnumMember(Value = "Non-Ec")] NonEc,
-        [EnumMember(Value = "EC Goods")] ECGoods,
-        [EnumMember(Value = "EC Services")] ECServices
-	}
-
-	public enum InvoiceItemType
-	{
-		[EnumMember(Value = "Hours")] Hours,
-		[EnumMember(Value = "Days")] Days,
-		[EnumMember(Value = "Weeks")] Weeks,
-		[EnumMember(Value = "Months")] Months,
-		[EnumMember(Value = "Years")]  Years,
-		[EnumMember(Value = "Products")] Products,
-		[EnumMember(Value = "Services")] Services,
-		[EnumMember(Value = "Training")] Training,
-		[EnumMember(Value = "Expenses")] Expenses,
-		[EnumMember(Value = "Comment")]  Comment,
-		[EnumMember(Value = "Bills")]  Bills,
-		[EnumMember(Value = "Discount")] Discount,
-		[EnumMember(Value = "Credit")] Credit,
-		[EnumMember(Value = "VAT")] VAT,
-		[EnumMember(Value = "No Unit")] NoUnit
 	}
 
 	public class InvoiceWrapper

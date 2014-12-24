@@ -1,6 +1,4 @@
 using Refit;
-using System;
-using System.Runtime.Serialization;
 
 namespace FreeAgent.Model
 {
@@ -21,12 +19,5 @@ namespace FreeAgent.Model
         [AliasAs("refresh_token")]
         public string RefreshToken { get; set; }
 	}
-
-    public enum AccessRequestType
-    {
-        [EnumMember(Value = "authorization_code")] authorization_code,
-        [EnumMember(Value = "refresh_token")] refresh_token
-    }
-
 }
 

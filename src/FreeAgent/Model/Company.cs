@@ -32,22 +32,6 @@ namespace FreeAgent.Model
         public string SalesTaxRegistrationNumber { get; set; }
     }
 
-    public enum CompanyType
-    {
-        UkLimitedCompany = 1
-    }
-
-    public enum MileageUnits
-    {
-        [EnumMember(Value = "miles")] Miles
-    }
-
-    public enum SalesTaxRegistrationStatus
-    {
-        [EnumMember(Value = "Registered")] Registered,
-        [EnumMember(Value = "Not Registered")] NotRegistered
-    }
-
     public class CompanyWrapper
     {
         public Company Company { get; set; }

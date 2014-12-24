@@ -25,13 +25,6 @@ namespace FreeAgent.Model
         public DateTime? CreatedAt { get; set; }
 	}
 
-    public enum BankAccountType
-    {
-        [EnumMember(Value = "StandardBankAccount")] StandardBankAccount,
-        [EnumMember(Value = "PaypalAccount")] PaypalAccount,
-        [EnumMember(Value = "CreditCardAccount")] CreditCardAccount
-    }
-
 	public class BankAccountWrapper
 	{
 		public BankAccount BankAccount { get; set; }

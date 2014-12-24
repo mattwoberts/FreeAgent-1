@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
 
 namespace FreeAgent.Model
 {
@@ -34,34 +33,9 @@ namespace FreeAgent.Model
         public DateTime? CreatedAt { get; set; }
 	}
 	
-	public enum ProjectBudgetUnits 
-	{
-		[EnumMember(Value = "Hours")] Hours,
-		[EnumMember(Value = "Days")] Days,
-		[EnumMember(Value = "Monetary")] Monetary
-	}
-	
-	public enum ProjectStatus 
-	{
-		[EnumMember(Value = "Active")] Active,
-		[EnumMember(Value = "Completed")] Completed,
-		[EnumMember(Value = "Cancelled")] Cancelled,
-        [EnumMember(Value = "Hidden")] Hidden
-	}
-
-    public enum ProjectBillingPeriod
-    {
-        [EnumMember(Value = "hour")] Hour,
-        [EnumMember(Value = "day")] Day
-    }
-	
 	public class ProjectWrapper
 	{
 		public Project Project { get; set; }
         public List<Project> Projects { get; set; }
     }
 }
-
-
-
-

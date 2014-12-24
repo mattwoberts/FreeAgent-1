@@ -119,13 +119,9 @@ namespace FreeAgent
     //TODO - replace the various status changes with an enum that we get the member value from...
     public enum ChangeInvoiceStatus
     {
-        [EnumMember(Value = "Draft")]
-        Draft,
-        [EnumMember(Value = "Scheduled")]
-        Scheduled,
-        [EnumMember(Value = "Sent")]
-        Sent,
-        [EnumMember(Value = "Cancelled")]
-        Cancelled
+        [EnumMember(Value = "mark_as_draft")] Draft,
+        [EnumMember(Value = "mark_as_scheduled")] Scheduled,
+        [EnumMember(Value = "mark_as_sent")] Sent,
+        [EnumMember(Value = "mark_as_cancelled")] Cancelled
     }
 }

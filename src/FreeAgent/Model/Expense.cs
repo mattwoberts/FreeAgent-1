@@ -7,45 +7,35 @@ namespace FreeAgent.Model
 	{
         public Expense()
         {
-            have_vat_receipt = false;
-            ec_status = ECStatus.None;
+            HaveVatReceipt = false;
+            EcStatus = ECStatus.None;
         }
 
         public Uri Url { get; set; }
         public Uri User { get; set; }
 		public Uri Project { get; set;}
-		public double gross_value { get; set;}
-		public double sales_tax_rate { get; set;}
-		public string description { get; set;}
-		public string dated_on { get; set;}
-		public string category { get; set;}
-		public double mileage { get; set;}
-		public double reclaim_mileage_rate { get; set;}
-		public double rebill_mileage_rate { get; set;}
-        public string rebill_type { get; set; }
-        public double initial_rate_mileage { get; set; }
-        public string receipt_reference { get; set; }
-        public int ec_status { get; set; }
-		public string currency { get; set; }
-
-
-        public double manual_sales_tax_amount { get; set;}
-		public double rebill_factor { get; set;}
-        public string vehicle_type { get; set;}
-        public int engine_size_index { get; set;}
-        public int engine_type_index { get; set; }
-        public bool have_vat_receipt { get; set; }
-		public Attachment attachment  { get; set;}
-
+		public double GrossValue { get; set;}
+		public double SalesTaxRate { get; set;}
+		public string Description { get; set;}
+		public DateTime DatedOn { get; set;}
+		public Uri Category { get; set;}
+		public double Mileage { get; set;}
+		public double ReclaimMileageRate { get; set;}
+		public double RebillMileageRate { get; set;}
+        public string RebillType { get; set; }
+        public double InitialRateMileage { get; set; }
+        public string ReceiptReference { get; set; }
+        public ECStatus EcStatus { get; set; }
+		public string Currency { get; set; }
+        public double ManualSalesTaxAmount { get; set;}
+		public double RebillFactor { get; set;}
+        public string VehicleType { get; set;}
+        public int EngineSizeIndex { get; set;}
+        public int EngineTypeIndex { get; set; }
+        public bool HaveVatReceipt { get; set; }
+		public Attachment Attachment  { get; set;}
         public DateTime? UpdatedAt { get; set; }
         public DateTime? CreatedAt { get; set; }
-    }
-	
-    public class ECStatus 
-    {
-        public const int None = 0;
-        public const int Goods = 2;
-        public const int Service = 1;
     }
 	
 	public class ExpenseWrapper

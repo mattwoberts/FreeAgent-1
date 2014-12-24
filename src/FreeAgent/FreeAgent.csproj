@@ -36,6 +36,23 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Configuration.cs" />
+    <Compile Include="Enums\AccessRequestType.cs" />
+    <Compile Include="Enums\AttachmentContentType.cs" />
+    <Compile Include="Enums\BankAccountType.cs" />
+    <Compile Include="Enums\ECStatus.cs" />
+    <Compile Include="Enums\InvoiceItemType.cs" />
+    <Compile Include="Enums\InvoiceECStatus.cs" />
+    <Compile Include="Enums\InvoiceStatus.cs" />
+    <Compile Include="Enums\ProjectBillingPeriod.cs" />
+    <Compile Include="Enums\ProjectStatus.cs" />
+    <Compile Include="Enums\ProjectBudgetUnits.cs" />
+    <Compile Include="Enums\SalesTaxRegistrationStatus.cs" />
+    <Compile Include="Enums\MileageUnits.cs" />
+    <Compile Include="Enums\CompanyType.cs" />
+    <Compile Include="Enums\TaskBillingPeriod.cs" />
+    <Compile Include="Enums\TaskStatus.cs" />
+    <Compile Include="Enums\UserRole.cs" />
+    <Compile Include="Enums\UserPermission.cs" />
     <Compile Include="Extensions\CompanyExtensions.cs" />
     <Compile Include="Extensions\FreeAgentException.cs" />
     <Compile Include="Extensions\ContactExtensions.cs" />
@@ -82,6 +99,7 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="packages\refit.2.0.2\build\refit.targets" Condition="Exists('packages\refit.2.0.2\build\refit.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
