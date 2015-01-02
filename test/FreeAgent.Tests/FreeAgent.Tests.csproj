@@ -71,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AttachmentTests.cs" />
+    <Compile Include="CategoryTests.cs" />
     <Compile Include="Helpers\ConfigurationHelper.cs" />
     <Compile Include="Helpers\ContactHelper.cs" />
     <Compile Include="Helpers\BankHelper.cs" />

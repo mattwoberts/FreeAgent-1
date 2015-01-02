@@ -115,6 +115,18 @@ namespace FreeAgent
             return (Task<BillWrapper>) methodImpls["GetBill"](Client, arguments);
         }
 
+        public virtual Task<Categories> CategoryList(string authorization)
+        {
+            var arguments = new object[] { authorization };
+            return (Task<Categories>) methodImpls["CategoryList"](Client, arguments);
+        }
+
+        public virtual Task<CategoryWrapper> GetCategory(string authorization,string nominalCode)
+        {
+            var arguments = new object[] { authorization,nominalCode };
+            return (Task<CategoryWrapper>) methodImpls["GetCategory"](Client, arguments);
+        }
+
         public virtual Task<InvoiceWrapper> InvoiceList(string authorization,string view,string sort,bool nested_invoice_items)
         {
             var arguments = new object[] { authorization,view,sort,nested_invoice_items };

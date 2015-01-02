@@ -28,10 +28,21 @@ namespace FreeAgent.Tests
             Assert.AreEqual("Test2", result);
         }
 
+        [Test]
+        public void Enum_Helper_Returns_Null_EnumMember_Value()
+        {
+            var input = TestEnum.Test3;
+
+            var result = input.GetMemberValue();
+
+            Assert.IsNull(result);
+        }
+
         public enum TestEnum
         {
             [EnumMember(Value = "test_value")] Test1,
-            Test2
+            Test2,
+            [EnumMember(Value = null)] Test3
         }
     }
 }

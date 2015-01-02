@@ -20,5 +20,13 @@ namespace FreeAgent.Model
 		public List<Category> IncomeCategories { get; set; }
 		public List<Category> GeneralCategories { get; set; }
 	}
+
+    public class CategoryWrapper
+    {
+        public Category AdminExpensesCategories { get; set; }
+        public Category CostOfSalesCategories { get; set; }
+        public Category IncomeCategories { get; set; }
+        public Category GeneralCategories { get; set; }
+    }
 }
 

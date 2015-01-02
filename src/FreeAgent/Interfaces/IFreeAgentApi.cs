@@ -28,7 +28,7 @@ namespace FreeAgent
 
         #endregion attachments
 
-        #region Company
+        #region company
 
         [Get("/company")]
         Task<CompanyWrapper> CompanyDetails([Header("Authorization")] string authorization);
@@ -36,9 +36,9 @@ namespace FreeAgent
         [Get("/company/tax_timeline")]
         Task<TaxTimelineWrapper> TaxTimelines([Header("Authorization")] string authorization);
 
-        #endregion
+        #endregion company
 
-        #region Bank Accounts
+        #region bank accounts
 
         [Get("/bank_accounts")]
         Task<BankAccountWrapper> BankAccountList([Header("Authorization")] string authorization, string view);
@@ -55,7 +55,7 @@ namespace FreeAgent
         [Delete("/bank_accounts/{id}")]
         Task DeleteBankAccount([Header("Authorization")] string authorization, int id);
 
-        #endregion
+        #endregion bank accounts
 
         [Get("/bills")]
         Task<BillWrapper> BillList([Header("Authorization")] string authorization, string view = "all");
@@ -63,10 +63,20 @@ namespace FreeAgent
         [Get("/bills/{id}")]
         Task<BillWrapper> GetBill([Header("Authorization")] string authorization, int id);
 
-        #region invoices 
+        #region categories
+
+        [Get("/categories")]
+        Task<Categories> CategoryList([Header("Authorization")] string authorization);
+
+        [Get("/categories/{nominalCode}")]
+        Task<CategoryWrapper> GetCategory([Header("Authorization")] string authorization, string nominalCode);
+
+        #endregion categories
+
+        #region invoices
 
         [Get("/invoices")] 
-        Task<InvoiceWrapper> InvoiceList([Header("Authorization")] string authorization, string view = "recent_open_or_overdue", string sort="created_at", bool nested_invoice_items = true);
+        Task<InvoiceWrapper> InvoiceList([Header("Authorization")] string authorization, string view, string sort, bool nested_invoice_items = true);
 
         [Get("/invoice/{id}")]
         Task<InvoiceWrapper> GetInvoice([Header("Authorization")] string authorization, int id);

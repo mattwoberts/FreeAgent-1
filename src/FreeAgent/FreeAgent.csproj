@@ -39,6 +39,7 @@
     <Compile Include="Enums\AccessRequestType.cs" />
     <Compile Include="Enums\AttachmentContentType.cs" />
     <Compile Include="Enums\BankAccountType.cs" />
+    <Compile Include="Enums\Currency.cs" />
     <Compile Include="Enums\ECStatus.cs" />
     <Compile Include="Enums\InvoiceItemType.cs" />
     <Compile Include="Enums\InvoiceECStatus.cs" />
@@ -52,6 +53,7 @@
     <Compile Include="Enums\TaskStatus.cs" />
     <Compile Include="Enums\UserRole.cs" />
     <Compile Include="Enums\UserPermission.cs" />
+    <Compile Include="ModelExtensions\CategoryExtensions.cs" />
     <Compile Include="ModelExtensions\CompanyExtensions.cs" />
     <Compile Include="FreeAgentException.cs" />
     <Compile Include="ModelExtensions\AttachmentExtensions.cs" />
