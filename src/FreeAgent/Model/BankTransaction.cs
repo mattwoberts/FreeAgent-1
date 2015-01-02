@@ -13,7 +13,7 @@ namespace FreeAgent.Model
 		public double UnexplainedAmount { get; set; }
 		public bool IsManual { get; set; }
 
-        //TODO explanations
+        public List<BankTransactionExplanation> BankTransactionExplanations { get; set; }
 	}
 
 	public class BankTransactionWrapper

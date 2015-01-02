@@ -11,7 +11,7 @@ namespace FreeAgent.Model
 			Status = ProjectStatus.Active;
 			BudgetUnits = ProjectBudgetUnits.Hours;
 			Currency = "GBP";
-            BillingPeriod = ProjectBillingPeriod.Hour;
+            BillingPeriod = BillingPeriod.Hour;
 		}
 
         public Uri Url { get; set; }
@@ -28,7 +28,7 @@ namespace FreeAgent.Model
 		public double HoursPerDay { get; set; }
 		public bool UsesProjectInvoiceSequence { get; set; }
 		public string Currency { get; set; }
-		public ProjectBillingPeriod BillingPeriod { get; set; }
+		public BillingPeriod BillingPeriod { get; set; }
         public DateTime? UpdatedAt { get; set; }
         public DateTime? CreatedAt { get; set; }
 	}

@@ -49,16 +49,28 @@ namespace FreeAgent
             return (Task<AccessResponse>) methodImpls["RefreshAccessToken"](Client, arguments);
         }
 
-        public virtual Task<CompanyWrapper> GetCompanyDetails(string authorization)
+        public virtual Task<AttachmentWrapper> GetAttachment(string authorization,int id)
         {
-            var arguments = new object[] { authorization };
-            return (Task<CompanyWrapper>) methodImpls["GetCompanyDetails"](Client, arguments);
+            var arguments = new object[] { authorization,id };
+            return (Task<AttachmentWrapper>) methodImpls["GetAttachment"](Client, arguments);
         }
 
-        public virtual Task<TaxTimelineWrapper> GetTaxTimelines(string authorization)
+        public virtual Task DeleteAttachment(string authorization,int id)
+        {
+            var arguments = new object[] { authorization,id };
+            return (Task) methodImpls["DeleteAttachment"](Client, arguments);
+        }
+
+        public virtual Task<CompanyWrapper> CompanyDetails(string authorization)
         {
             var arguments = new object[] { authorization };
-            return (Task<TaxTimelineWrapper>) methodImpls["GetTaxTimelines"](Client, arguments);
+            return (Task<CompanyWrapper>) methodImpls["CompanyDetails"](Client, arguments);
+        }
+
+        public virtual Task<TaxTimelineWrapper> TaxTimelines(string authorization)
+        {
+            var arguments = new object[] { authorization };
+            return (Task<TaxTimelineWrapper>) methodImpls["TaxTimelines"](Client, arguments);
         }
 
         public virtual Task<BankAccountWrapper> BankAccountList(string authorization,string view)
@@ -91,10 +103,10 @@ namespace FreeAgent
             return (Task) methodImpls["DeleteBankAccount"](Client, arguments);
         }
 
-        public virtual Task<BillWrapper> GetBillList(string authorization,string view)
+        public virtual Task<BillWrapper> BillList(string authorization,string view)
         {
             var arguments = new object[] { authorization,view };
-            return (Task<BillWrapper>) methodImpls["GetBillList"](Client, arguments);
+            return (Task<BillWrapper>) methodImpls["BillList"](Client, arguments);
         }
 
         public virtual Task<BillWrapper> GetBill(string authorization,int id)
@@ -103,10 +115,10 @@ namespace FreeAgent
             return (Task<BillWrapper>) methodImpls["GetBill"](Client, arguments);
         }
 
-        public virtual Task<InvoiceWrapper> GetInvoiceList(string authorization,string view,string sort,bool nested_invoice_items)
+        public virtual Task<InvoiceWrapper> InvoiceList(string authorization,string view,string sort,bool nested_invoice_items)
         {
             var arguments = new object[] { authorization,view,sort,nested_invoice_items };
-            return (Task<InvoiceWrapper>) methodImpls["GetInvoiceList"](Client, arguments);
+            return (Task<InvoiceWrapper>) methodImpls["InvoiceList"](Client, arguments);
         }
 
         public virtual Task<InvoiceWrapper> GetInvoice(string authorization,int id)
@@ -115,22 +127,22 @@ namespace FreeAgent
             return (Task<InvoiceWrapper>) methodImpls["GetInvoice"](Client, arguments);
         }
 
-        public virtual Task<InvoiceWrapper> PostInvoice(string authorization,Invoice invoice)
+        public virtual Task<InvoiceWrapper> CreateInvoice(string authorization,Invoice invoice)
         {
             var arguments = new object[] { authorization,invoice };
-            return (Task<InvoiceWrapper>) methodImpls["PostInvoice"](Client, arguments);
+            return (Task<InvoiceWrapper>) methodImpls["CreateInvoice"](Client, arguments);
         }
 
-        public virtual System.Threading.Tasks.Task PutInvoiceStatus(string authorization,int id,string transition)
+        public virtual Task ChangeInvoiceStatus(string authorization,int id,string transition)
         {
             var arguments = new object[] { authorization,id,transition };
-            return (System.Threading.Tasks.Task) methodImpls["PutInvoiceStatus"](Client, arguments);
+            return (Task) methodImpls["ChangeInvoiceStatus"](Client, arguments);
         }
 
-        public virtual Task<ProjectWrapper> GetProjectList(string authorization,string view)
+        public virtual Task<ProjectWrapper> ProjectList(string authorization,string view,string sort)
         {
-            var arguments = new object[] { authorization,view };
-            return (Task<ProjectWrapper>) methodImpls["GetProjectList"](Client, arguments);
+            var arguments = new object[] { authorization,view,sort };
+            return (Task<ProjectWrapper>) methodImpls["ProjectList"](Client, arguments);
         }
 
         public virtual Task<InvoiceWrapper> GetProject(string authorization,int id)
@@ -139,16 +151,22 @@ namespace FreeAgent
             return (Task<InvoiceWrapper>) methodImpls["GetProject"](Client, arguments);
         }
 
-        public virtual Task<ContactWrapper> GetContactList(string authorization,string view,string sort)
+        public virtual Task<ContactWrapper> ContactList(string authorization,string view,string sort)
         {
             var arguments = new object[] { authorization,view,sort };
-            return (Task<ContactWrapper>) methodImpls["GetContactList"](Client, arguments);
+            return (Task<ContactWrapper>) methodImpls["ContactList"](Client, arguments);
         }
 
         public virtual Task<ContactWrapper> CreateContact(string authorization,ContactWrapper contact)
         {
             var arguments = new object[] { authorization,contact };
             return (Task<ContactWrapper>) methodImpls["CreateContact"](Client, arguments);
+        }
+
+        public virtual Task UpdateContact(string authorization,int id,ContactWrapper contact)
+        {
+            var arguments = new object[] { authorization,id,contact };
+            return (Task) methodImpls["UpdateContact"](Client, arguments);
         }
 
         public virtual Task<ContactWrapper> GetContact(string authorization,int id)

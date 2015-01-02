@@ -27,7 +27,7 @@ namespace FreeAgent.Tests
 
 
         [Test]
-        public void Company_Json_Result_Should_Deserialize_Correctly()
+        public void Serializer_Company_Json_Result_Should_Deserialize_Correctly()
         {
             var company = JsonConvert.DeserializeObject<Company>(_testString);
 
@@ -46,7 +46,7 @@ namespace FreeAgent.Tests
         }
 
         [Test]
-        public void Company_Class_Should_Serialize_Correctly()
+        public void Serializer_Company_Class_Should_Serialize_Correctly()
         {
             var testCompany = new Company
             {
@@ -71,7 +71,7 @@ namespace FreeAgent.Tests
         }
 
         [Test]
-        public void Company_Url_Should_Throw_ID_Exception()
+        public void ExtractId_Company_Url_Should_Throw_ID_Exception()
         {
             // arrange
             var client = new FreeAgentClient(Helper.Configuration());

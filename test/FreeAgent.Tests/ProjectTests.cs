@@ -8,11 +8,11 @@ using FreeAgent.Model;
 
 namespace FreeAgent.Tests
 {
-    public class InvoiceTests : TestFixtureBase
+    public class ProjectTests : TestFixtureBase
     {
         [Test]
         [Ignore]
-        public async Task GetInvoices()
+        public async Task GetProjects()
         {
             var invoices = await this.Client.GetInvoicesAsync();
 
@@ -20,14 +20,15 @@ namespace FreeAgent.Tests
 
             var openInvoices = await this.Client.GetInvoicesAsync(filter);
 
-            var sortedFilter = InvoiceViewFilter.RecentOpenOrOverdue();
+            var sortedFilter = InvoiceViewFilter
+                                    .RecentOpenOrOverdue();
 
-            var sortedInvoices = await this.Client.GetInvoicesAsync(sortedFilter, InvoiceOrder.CreatedAt); 
+            var sortedInvoices = await this.Client.GetInvoicesAsync(sortedFilter); 
         }
 
         [Test]
         [Ignore]
-        public void GetSingleInvoice()
+        public void GetSingleProject()
         {
             
 
@@ -35,7 +36,7 @@ namespace FreeAgent.Tests
 
         [Test]
         [Ignore]
-        public async Task CreateInvoice()
+        public async Task CreateProject()
         {
 
             var invoice = new Invoice()
@@ -47,21 +48,19 @@ namespace FreeAgent.Tests
             var result = await this.Client.CreateInvoice(invoice);
         }
 
-        [Test]
-        [Ignore]
-        public async Task MarkInvoiceAsSent()
-        {
+        //[Test]
+        //[Ignore]
+        //public async Task MarkInvoiceAsSent()
+        //{
 
-            var invoice = new Invoice()
-            {
+        //    var invoice = new Invoice()
+        //    {
 
 
-            };
+        //    };
+        //}
 
-            var result = await this.Client.ChangeInvoiceStatus(invoice, InvoiceStatus.Sent);
-            var result2 = await this.Client.ChangeInvoiceStatus(invoice, InvoiceStatus.Cancelled);
-            var result3 = await this.Client.ChangeInvoiceStatus(invoice, InvoiceStatus.Scheduled);
-        }
+
 
 
         [Test]

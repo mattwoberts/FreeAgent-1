@@ -18,13 +18,23 @@ namespace FreeAgent
 
         #endregion
 
+        #region attachments
+
+        [Get("/attachments/{id}")]
+        Task<AttachmentWrapper> GetAttachment([Header("Authorization")] string authorization, int id);
+
+        [Delete("/attachments/{id}")]
+        Task DeleteAttachment([Header("Authorization")] string authorization, int id);
+
+        #endregion attachments
+
         #region Company
 
         [Get("/company")]
-        Task<CompanyWrapper> GetCompanyDetails([Header("Authorization")] string authorization);
+        Task<CompanyWrapper> CompanyDetails([Header("Authorization")] string authorization);
 
         [Get("/company/tax_timeline")]
-        Task<TaxTimelineWrapper> GetTaxTimelines([Header("Authorization")] string authorization);
+        Task<TaxTimelineWrapper> TaxTimelines([Header("Authorization")] string authorization);
 
         #endregion
 
@@ -48,36 +58,47 @@ namespace FreeAgent
         #endregion
 
         [Get("/bills")]
-        Task<BillWrapper> GetBillList([Header("Authorization")] string authorization, string view = "all");
+        Task<BillWrapper> BillList([Header("Authorization")] string authorization, string view = "all");
 
         [Get("/bills/{id}")]
         Task<BillWrapper> GetBill([Header("Authorization")] string authorization, int id);
 
+        #region invoices 
+
         [Get("/invoices")] 
-        Task<InvoiceWrapper> GetInvoiceList([Header("Authorization")] string authorization, string view = "recent_open_or_overdue", string sort="created_at", bool nested_invoice_items = true);
+        Task<InvoiceWrapper> InvoiceList([Header("Authorization")] string authorization, string view = "recent_open_or_overdue", string sort="created_at", bool nested_invoice_items = true);
 
         [Get("/invoice/{id}")]
         Task<InvoiceWrapper> GetInvoice([Header("Authorization")] string authorization, int id);
 
         [Post("/invoices")]
-        Task<InvoiceWrapper> PostInvoice([Header("Authorization")] string authorization, Invoice invoice);
+        Task<InvoiceWrapper> CreateInvoice([Header("Authorization")] string authorization, Invoice invoice);
 
         [Put("/invoices/{id}/transitions/{transition}")]
-        System.Threading.Tasks.Task PutInvoiceStatus([Header("Authorization")] string authorization, int id, string transition);
+        Task ChangeInvoiceStatus([Header("Authorization")] string authorization, int id, string transition);
+
+        #endregion
+
+        #region projects
 
         [Get("/projects")]
-        Task<ProjectWrapper> GetProjectList([Header("Authorization")] string authorization, string view);
+        Task<ProjectWrapper> ProjectList([Header("Authorization")] string authorization, string view, string sort);
 
         [Get("/projects/{id}")]
         Task<InvoiceWrapper> GetProject([Header("Authorization")] string authorization, int id);
 
+        #endregion
+
         #region contacts
 
         [Get("/contacts")]
-        Task<ContactWrapper> GetContactList([Header("Authorization")] string authorization, string view, string sort);
+        Task<ContactWrapper> ContactList([Header("Authorization")] string authorization, string view, string sort);
 
         [Post("/contacts")]
         Task<ContactWrapper> CreateContact([Header("Authorization")] string authorization, [Body] ContactWrapper contact);
+
+        [Put("/contacts/{id}")]
+        Task UpdateContact([Header("Authorization")] string authorization, int id, [Body] ContactWrapper contact);
 
         [Get("/contacts/{id}")]
         Task<ContactWrapper> GetContact([Header("Authorization")] string authorization, int id);

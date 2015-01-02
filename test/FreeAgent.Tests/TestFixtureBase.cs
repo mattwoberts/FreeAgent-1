@@ -16,7 +16,23 @@ namespace FreeAgent.Tests
                 Client = new FreeAgentClient(Helper.Configuration());
                 Client.RenewAccessIfRequired().Wait();
             }
+
+            SetupCustom();
         }
 
+        [TestFixtureTearDown]
+        public void TearDown()
+        {
+            if (Client != null)
+            {
+                Client = null;
+            }
+
+            TearDownCustom();
+        }
+
+        protected virtual void SetupCustom() { }
+
+        protected virtual void TearDownCustom() { }
     }
 }

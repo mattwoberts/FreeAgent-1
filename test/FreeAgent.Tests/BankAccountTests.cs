@@ -11,7 +11,7 @@ namespace FreeAgent.Tests
     public class BankAccountTests : TestFixtureBase
     {
         [Test]
-        public async Task ShouldReturnAListOfBankAccounts()
+        public async Task BankAccount_GetAll_Should_Return_List()
         {
             var accounts = await this.Client.GetBankAccountsAsync();
 
@@ -19,7 +19,7 @@ namespace FreeAgent.Tests
         }
 
         [Test]
-        public async Task CreateBankAccount()
+        public async Task BankAccount_Create_Will_Return_Url_And_Dates()
         {
             // arrange
             var source = Helper.NewStandardBankAccount();
@@ -39,7 +39,7 @@ namespace FreeAgent.Tests
         }
 
         [Test]
-        public void GetSingleBankAccountWithNoUrlShouldThrow()
+        public void BankAccount_Get_Single_With_No_Url_Should_Throw()
         {
             // arrange
             var source = Helper.NewStandardBankAccount();
@@ -54,7 +54,7 @@ namespace FreeAgent.Tests
 
 
         [Test]
-        public async Task GetSingleBankAccountShouldReturnAccount()
+        public async Task BankAccount_Get_Single_Should_Return_Account()
         {
             // arrange
             // - create a new account to retrieve
@@ -75,7 +75,29 @@ namespace FreeAgent.Tests
         }
 
         [Test]
-        public async Task ShouldDeleteAllTestAccounts()
+        public async Task BankAccount_Update_Should_Return_Updated_Details()
+        {
+            // arrange
+            var source = Helper.NewStandardBankAccount();
+            var account = await this.Client.CreateBankAccountAsync(source);
+
+            Assert.IsNotNull(account.Url);
+
+            // act - update the one just created
+            account.BankName = "*UPDATED*";
+            var result = await this.Client.UpdateBankAccountAsync(account);
+
+            // assert
+            var account2 = await this.Client.GetBankAccountAsync(account);
+
+            Assert.IsTrue(result);
+            Assert.AreEqual(account.Url, account2.Url);
+            Assert.AreEqual(account.CreatedAt, account2.CreatedAt);
+            Assert.AreEqual(account.BankName, account2.BankName);
+            Assert.LessOrEqual(account.UpdatedAt, account2.UpdatedAt);
+        }
+        [Test]
+        public async Task BankAccount_Delete_Should_Remove_All_Test_Accounts()
         {
             // arrange
             var accounts = await this.Client.GetBankAccountsAsync();
@@ -97,7 +119,7 @@ namespace FreeAgent.Tests
         }
 
         [Test]
-        public async Task ShouldOnlyBeOnePrimaryAccount()
+        public async Task BankAccount_Should_Only_Be_One_Primary_Account()
         {
             // arrange
             var accounts = await this.Client.GetBankAccountsAsync();
@@ -110,7 +132,7 @@ namespace FreeAgent.Tests
         }
 
         [Test]
-        public async Task ShouldNotBeAbleToDeletePrimaryAccount()
+        public async Task BankAccount_Shouldnt_Be_Able_To_Delete_Primary_Account()
         {
             // arrange
             var accounts = await this.Client.GetBankAccountsAsync();
@@ -133,7 +155,7 @@ namespace FreeAgent.Tests
                 var freeAgentException = exResult as FreeAgentException;
                 Assert.IsNotNull(freeAgentException);
                 Assert.IsNotNull(freeAgentException.InnerException);
-                Assert.IsInstanceOf<Refit.ApiException>(freeAgentException.InnerException);
+                Assert.IsInstanceOf<Refit.ApiException>(freeAgentException.InnerException); //TODO - surface this info 
 
                 var refitException = freeAgentException.InnerException as Refit.ApiException;
                 Assert.AreEqual(System.Net.HttpStatusCode.Conflict, refitException.StatusCode);

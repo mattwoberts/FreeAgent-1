@@ -11,7 +11,7 @@ namespace FreeAgent.Tests
     public class ContactTests : TestFixtureBase
     {
         [Test]
-        public async Task GetContacts()
+        public async Task Contact_Get_Should_Return_Something()
         {
             var contacts = await this.Client.GetContactsAsync();
 
@@ -20,7 +20,7 @@ namespace FreeAgent.Tests
         }
 
         [Test]
-        public async Task CreateContact()
+        public async Task Contact_Create_Should_Return_Same_With_Url()
         {
             // arrange
             var source = Helper.NewContact();
@@ -39,7 +39,7 @@ namespace FreeAgent.Tests
         }
 
         [Test]
-        public void GetSingleContactWithNoUrlShouldThrow()
+        public void Contact_Get_Single_Without_Url_Should_Throw()
         {
             // arrange
             var source = Helper.NewContact();
@@ -54,7 +54,7 @@ namespace FreeAgent.Tests
 
 
         [Test]
-        public async Task GetSingleContactShouldReturnAccount()
+        public async Task Contact_Get_Single_Should_Return_Contact()
         {
             // arrange
             var source = Helper.NewContact();
@@ -63,16 +63,43 @@ namespace FreeAgent.Tests
             Assert.IsNotNull(contact.Url);
 
             // act - get the one just created by number
-            var result = await this.Client.GetContactAsync(contact.Url);
+            var contactByUrl = await this.Client.GetContactAsync(contact.Url);
+            var contactByObject = await this.Client.GetContactAsync(contact.Url);
 
             // assert
-            Assert.IsNotNull(result);
-            Assert.AreEqual(contact.Url, result.Url);
-            Assert.AreEqual(contact.CreatedAt, result.CreatedAt);
+            Assert.IsNotNull(contactByUrl);
+            Assert.AreEqual(contact.Url, contactByUrl.Url);
+            Assert.AreEqual(contact.Url, contactByObject.Url);
+            Assert.AreEqual(contact.CreatedAt, contactByUrl.CreatedAt);
+            Assert.AreEqual(contact.CreatedAt, contactByObject.CreatedAt);
         }
 
         [Test]
-        public async Task ShouldDeleteAllTestAccounts()
+        public async Task Contact_Update_Should_Return_Updated_Details()
+        {
+            // arrange
+            var source = Helper.NewContact();
+            var contact = await this.Client.CreateContactAsync(source);
+
+            Assert.IsNotNull(contact.Url);
+
+            // act - update the one just created
+            contact.Address2 = "*UPDATED*";
+            var result = await this.Client.UpdateContactAsync(contact);
+
+            // assert
+            var contact2 = await this.Client.GetContactAsync(contact);
+
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result);
+            Assert.AreEqual(contact.Url, contact2.Url);
+            Assert.AreEqual(contact.CreatedAt, contact2.CreatedAt);
+            Assert.AreEqual(contact.Address2, contact2.Address2);
+            Assert.LessOrEqual(contact.UpdatedAt, contact2.UpdatedAt);
+        }
+
+        [Test]
+        public async Task Contact_Delete_Should_Delete_All_Test_Contacts()
         {
             // arrange
             var contacts = await this.Client.GetContactsAsync();

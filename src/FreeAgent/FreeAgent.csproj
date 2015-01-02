@@ -8,8 +8,8 @@
     <ProjectGuid>{70ED032B-695A-4E16-B7C0-88C697439C20}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FreeSharp</RootNamespace>
-    <AssemblyName>FreeSharp</AssemblyName>
+    <RootNamespace>FreeAgent</RootNamespace>
+    <AssemblyName>FreeAgent</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -43,24 +43,25 @@
     <Compile Include="Enums\InvoiceItemType.cs" />
     <Compile Include="Enums\InvoiceECStatus.cs" />
     <Compile Include="Enums\InvoiceStatus.cs" />
-    <Compile Include="Enums\ProjectBillingPeriod.cs" />
     <Compile Include="Enums\ProjectStatus.cs" />
     <Compile Include="Enums\ProjectBudgetUnits.cs" />
     <Compile Include="Enums\SalesTaxRegistrationStatus.cs" />
     <Compile Include="Enums\MileageUnits.cs" />
     <Compile Include="Enums\CompanyType.cs" />
-    <Compile Include="Enums\TaskBillingPeriod.cs" />
+    <Compile Include="Enums\BillingPeriod.cs" />
     <Compile Include="Enums\TaskStatus.cs" />
     <Compile Include="Enums\UserRole.cs" />
     <Compile Include="Enums\UserPermission.cs" />
-    <Compile Include="Extensions\CompanyExtensions.cs" />
-    <Compile Include="Extensions\FreeAgentException.cs" />
-    <Compile Include="Extensions\ContactExtensions.cs" />
-    <Compile Include="Extensions\ProjectExtensions.cs" />
-    <Compile Include="Extensions\InvoiceExtensions.cs" />
-    <Compile Include="Extensions\BankAccountExtensions.cs" />
+    <Compile Include="ModelExtensions\CompanyExtensions.cs" />
+    <Compile Include="FreeAgentException.cs" />
+    <Compile Include="ModelExtensions\AttachmentExtensions.cs" />
+    <Compile Include="ModelExtensions\ContactExtensions.cs" />
+    <Compile Include="ModelExtensions\ProjectExtensions.cs" />
+    <Compile Include="ModelExtensions\InvoiceExtensions.cs" />
+    <Compile Include="ModelExtensions\BankAccountExtensions.cs" />
     <Compile Include="FreeAgentClient.cs" />
-    <Compile Include="Helpers\DeliminatorSeparatedPropertyNamesContractResolver - Copy.cs" />
+    <Compile Include="Helpers\DeliminatorSeparatedPropertyNamesContractResolver.cs" />
+    <Compile Include="Helpers\EnumExtensions.cs" />
     <Compile Include="Helpers\IsoDateConverter.cs" />
     <Compile Include="Helpers\StringExtensions.cs" />
     <Compile Include="Interfaces\IUrl.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="Model\AccessRequest.cs" />
     <Compile Include="Model\AccessResponse.cs" />
     <Compile Include="Model\Accounting.cs" />
+    <Compile Include="Model\BankTransactionExplanation.cs" />
     <Compile Include="Model\BankTransaction.cs" />
     <Compile Include="Model\BankAccount.cs" />
     <Compile Include="Model\Attachment.cs" />
@@ -88,7 +90,7 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\packages\Newtonsoft.Json.6.0.6\lib\portable-net45+wp80+win8+wpa81+aspnetcore50\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\packages\Newtonsoft.Json.6.0.7\lib\portable-net45+wp80+win8+wpa81+aspnetcore50\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Refit">
       <HintPath>..\..\packages\refit.2.1.0\lib\Portable-Net45+WinRT45+WP8+WPA81\Refit.dll</HintPath>

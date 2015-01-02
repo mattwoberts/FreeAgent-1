@@ -10,7 +10,7 @@ namespace FreeAgent.Model
 		public string Name { get; set; }
 		public bool IsBillable { get; set; }
 		public double BillingRate { get; set; }
-        public TaskBillingPeriod BillingPeriod { get; set; }
+        public BillingPeriod BillingPeriod { get; set; }
         public TaskStatus Status { get; set; }
 	}
 
