@@ -41,6 +41,6 @@ namespace FreeAgent.Model
 	public class BillWrapper
 	{
 		public Bill Bill { get; set; }
-		public List<Bill> bills { get; set; }
+		public List<Bill> Bills { get; set; }
 	}
 }

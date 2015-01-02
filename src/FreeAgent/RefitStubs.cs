@@ -193,6 +193,36 @@ namespace FreeAgent
             return (Task) methodImpls["DeleteContact"](Client, arguments);
         }
 
+        public virtual Task<NoteItemWrapper> NoteList(string authorization,string contact,string project)
+        {
+            var arguments = new object[] { authorization,contact,project };
+            return (Task<NoteItemWrapper>) methodImpls["NoteList"](Client, arguments);
+        }
+
+        public virtual Task<NoteItemWrapper> CreateNote(string authorization,NoteItemWrapper note,string contact,string project)
+        {
+            var arguments = new object[] { authorization,note,contact,project };
+            return (Task<NoteItemWrapper>) methodImpls["CreateNote"](Client, arguments);
+        }
+
+        public virtual Task UpdateNote(string authorization,int id,NoteItemWrapper contact)
+        {
+            var arguments = new object[] { authorization,id,contact };
+            return (Task) methodImpls["UpdateNote"](Client, arguments);
+        }
+
+        public virtual Task<NoteItemWrapper> GetNote(string authorization,int id)
+        {
+            var arguments = new object[] { authorization,id };
+            return (Task<NoteItemWrapper>) methodImpls["GetNote"](Client, arguments);
+        }
+
+        public virtual Task DeleteNote(string authorization,int id)
+        {
+            var arguments = new object[] { authorization,id };
+            return (Task) methodImpls["DeleteNote"](Client, arguments);
+        }
+
     }
 }
 

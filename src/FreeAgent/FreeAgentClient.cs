@@ -113,6 +113,17 @@ namespace FreeAgent
             this.Configuration.CurrentTokenExpiry = currentDate.AddSeconds(response.ExpiresIn);
         }
 
+        internal Uri ExtractUrl(IUrl model)
+        {
+            if (model == null)
+                throw new FreeAgentException("Cannot extract URL from null model");
+
+            if (model.Url == null || model.Url.Segments.Length <= 0)
+                throw new FreeAgentException("Model URL is null");
+
+            return model.Url;
+        }
+
         internal int ExtractId(IUrl model)
         {
             if (model == null)

@@ -117,5 +117,24 @@ namespace FreeAgent
         Task DeleteContact([Header("Authorization")] string authorization, int id);
 
         #endregion
+
+        #region notes 
+
+        [Get("/notes")]
+        Task<NoteItemWrapper> NoteList([Header("Authorization")] string authorization, string contact, string project);
+
+        [Post("/notes")]
+        Task<NoteItemWrapper> CreateNote([Header("Authorization")] string authorization, [Body] NoteItemWrapper note, string contact, string project);
+
+        [Put("/notes/{id}")]
+        Task UpdateNote([Header("Authorization")] string authorization, int id, [Body] NoteItemWrapper contact);
+
+        [Get("/notes/{id}")]
+        Task<NoteItemWrapper> GetNote([Header("Authorization")] string authorization, int id);
+
+        [Delete("/notes/{id}")]
+        Task DeleteNote([Header("Authorization")] string authorization, int id);
+
+        #endregion notes
     }
 }

@@ -53,6 +53,7 @@
     <Compile Include="Enums\TaskStatus.cs" />
     <Compile Include="Enums\UserRole.cs" />
     <Compile Include="Enums\UserPermission.cs" />
+    <Compile Include="ModelExtensions\NoteExtensions.cs" />
     <Compile Include="ModelExtensions\CategoryExtensions.cs" />
     <Compile Include="ModelExtensions\CompanyExtensions.cs" />
     <Compile Include="FreeAgentException.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="Model\BankTransaction.cs" />
     <Compile Include="Model\BankAccount.cs" />
     <Compile Include="Model\Attachment.cs" />
+    <Compile Include="Model\Note.cs" />
     <Compile Include="Model\Bill.cs" />
     <Compile Include="Model\Category.cs" />
     <Compile Include="Model\InvoiceEmail.cs" />
