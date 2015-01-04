@@ -1,16 +1,14 @@
-﻿using FreeAgent.Model;
-using System;
+﻿using FreeAgent.Helpers;
+using FreeAgent.Model;
 using System.Threading.Tasks;
-using FreeAgent.Helpers;
 
 namespace FreeAgent
 {
     public static class CategoryExtensions
     {
-        public static async Task<Categories> GetCategoriesAsync(this FreeAgentClient client)
+        public static Task<Categories> GetCategoriesAsync(this FreeAgentClient client)
         {
-            var result = await client.Execute(c => c.CategoryList(client.Configuration.CurrentHeader));
-            return result;
+            return client.GetOrCreateAsync(c => c.CategoryList(client.Configuration.CurrentHeader), r => r); 
         }
 
         public static async Task<Category> GetCategoryAsync(this FreeAgentClient client, Category category)
@@ -21,26 +19,29 @@ namespace FreeAgent
             return await client.GetCategoryAsync(category.NominalCode);
         }
 
-        public static async Task<Category> GetCategoryAsync(this FreeAgentClient client, string nominalCode)
+        public static Task<Category> GetCategoryAsync(this FreeAgentClient client, string nominalCode)
         {
-            var result = await client.Execute(c => c.GetCategory(client.Configuration.CurrentHeader, nominalCode));
+            return client.GetOrCreateAsync(
+                c => c.GetCategory(client.Configuration.CurrentHeader, nominalCode),
+                r =>
+                {
+                    if (r != null)
+                    {
+                        if (r.AdminExpensesCategories != null)
+                            return r.AdminExpensesCategories;
 
-            if (result != null)
-            {
-                if (result.AdminExpensesCategories != null)
-                    return result.AdminExpensesCategories;
+                        if (r.CostOfSalesCategories != null)
+                            return r.CostOfSalesCategories;
 
-                if (result.CostOfSalesCategories != null)
-                    return result.CostOfSalesCategories;
+                        if (r.GeneralCategories != null)
+                            return r.GeneralCategories;
 
-                if (result.GeneralCategories != null)
-                    return result.GeneralCategories;
+                        if (r.IncomeCategories != null)
+                            return r.IncomeCategories;
+                    }
 
-                if (result.IncomeCategories != null)
-                    return result.IncomeCategories;
-            }
- 
-            return null; //TODO - make this work like a true fail (ie wrong nominal code)
+                    return null; //TODO - make this work like a true fail (ie wrong nominal code)
+                });
         }
     }
 }

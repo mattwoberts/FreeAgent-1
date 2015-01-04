@@ -75,7 +75,7 @@ namespace FreeAgent.Tests
         }
 
         [Test]
-        public async Task Contact_Update_Should_Return_Updated_Details()
+        public async Task Contact_Update_Should_Store_Updated_Details()
         {
             // arrange
             var source = Helper.NewContact();
@@ -85,13 +85,11 @@ namespace FreeAgent.Tests
 
             // act - update the one just created
             contact.Address2 = "*UPDATED*";
-            var result = await this.Client.UpdateContactAsync(contact);
+            await this.Client.UpdateContactAsync(contact);
 
             // assert
             var contact2 = await this.Client.GetContactAsync(contact);
 
-            Assert.IsNotNull(result);
-            Assert.IsTrue(result);
             Assert.AreEqual(contact.Url, contact2.Url);
             Assert.AreEqual(contact.CreatedAt, contact2.CreatedAt);
             Assert.AreEqual(contact.Address2, contact2.Address2);

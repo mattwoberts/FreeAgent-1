@@ -46,6 +46,20 @@ namespace FreeAgent
             }
         }
 
+        internal async Task<TResult> GetOrCreateAsync<TResult,TWrapped>(Func<IFreeAgentApi, Task<TWrapped>> action, Func<TWrapped, TResult> returns)
+        {
+            //TODO - safety stuff here??
+            TWrapped result = await this.Execute(action);
+            return returns(result);
+        }
+
+        internal Task UpdateOrDeleteAsync(IUrl resource, Func<IFreeAgentApi, int, Task> action)
+        {
+            //TODO - safety stuff here??
+            var id = this.ExtractId(resource);
+            return this.Execute(c => action(c,id));
+        }
+
         internal async Task Execute(Func<IFreeAgentApi, Task> action)
         {
             try

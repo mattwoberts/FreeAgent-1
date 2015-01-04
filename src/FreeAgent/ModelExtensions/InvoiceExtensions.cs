@@ -8,28 +8,28 @@ namespace FreeAgent
 {
     public static class InvoiceExtensions
     {
-        public static async Task<List<Invoice>> GetInvoicesAsync(this FreeAgentClient client, InvoiceViewFilter invoiceFilter = null, InvoiceOrder orderBy = InvoiceOrder.CreatedAt)
+        public static Task<List<Invoice>> GetInvoicesAsync(this FreeAgentClient client, InvoiceViewFilter invoiceFilter = null, InvoiceOrder orderBy = InvoiceOrder.CreatedAt)
         {
-            var filter = invoiceFilter ?? InvoiceViewFilter.RecentOpenOrOverdue();
-            var order = orderBy.GetMemberValue();
+            var view = invoiceFilter ?? InvoiceViewFilter.RecentOpenOrOverdue();
+            var sort = orderBy.GetMemberValue();
 
-            var result = await client.Execute(c => c.InvoiceList(client.Configuration.CurrentHeader, filter.FilterValue, order));
-            return result.Invoices;
+            return client.GetOrCreateAsync(c => c.InvoiceList(client.Configuration.CurrentHeader, view.FilterValue, sort), r => r.Invoices); 
         }
 
-        public static async Task<Invoice> CreateInvoice(this FreeAgentClient client, Invoice invoice)
+        public static Task<Invoice> CreateInvoice(this FreeAgentClient client, Invoice invoice)
         {
-            var result = await client.Execute(c => c.CreateInvoice(client.Configuration.CurrentHeader, invoice));
-            return result.Invoice;
+            return client.GetOrCreateAsync(c => c.CreateInvoice(client.Configuration.CurrentHeader, invoice.Wrap()), r => r.Invoice); 
         }
 
-        public static async Task<bool> ChangeInvoiceStatus(this FreeAgentClient client, Invoice invoice, InvoiceStatus newStatus)
+        public static Task ChangeInvoiceStatus(this FreeAgentClient client, Invoice invoice, InvoiceStatus newStatus)
         {
-            var id = client.ExtractId(invoice);
             var newValue = "mark_as_" + newStatus.GetMemberValue().ToLowerInvariant();
+            return client.UpdateOrDeleteAsync(invoice, (c, id) => c.ChangeInvoiceStatus(client.Configuration.CurrentHeader, id, newValue));
+        }
 
-            await client.Execute(c => c.ChangeInvoiceStatus(client.Configuration.CurrentHeader, id, newValue));
-            return true;
+        internal static InvoiceWrapper Wrap(this Invoice invoice)
+        {
+            return new InvoiceWrapper { Invoice = invoice };
         }
     }
 

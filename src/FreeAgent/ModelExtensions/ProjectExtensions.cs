@@ -1,20 +1,19 @@
-﻿using FreeAgent.Model;
+﻿using FreeAgent.Helpers;
+using FreeAgent.Model;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Threading.Tasks;
-using FreeAgent.Helpers;
 
 namespace FreeAgent
 {
     public static class ProjectExtensions
     {
-        public static async Task<List<Project>> GetProjectsAsync(this FreeAgentClient client, ProjectFilter filterBy = ProjectFilter.All, ProjectOrder orderBy = ProjectOrder.Name)
+        public static Task<List<Project>> GetProjectsAsync(this FreeAgentClient client, ProjectFilter filterBy = ProjectFilter.All, ProjectOrder orderBy = ProjectOrder.Name)
         {
             var view = filterBy.GetMemberValue();
             var sort = orderBy.GetMemberValue();
 
-            var result = await client.Execute(c => c.ProjectList(client.Configuration.CurrentHeader, view, sort));
-            return result.Projects;
+            return client.GetOrCreateAsync(c => c.ProjectList(client.Configuration.CurrentHeader, view, sort), r => r.Projects); 
         }
     }
 

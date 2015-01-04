@@ -1,62 +1,51 @@
-﻿using FreeAgent.Model;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using FreeAgent.Helpers;
+﻿using FreeAgent.Helpers;
+using FreeAgent.Model;
 using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
+using System.Threading.Tasks;
 
 namespace FreeAgent
 {
     public static class BankAccountExtensions
     {
-        public static async Task<List<BankAccount>> GetBankAccountsAsync(this FreeAgentClient client, BankAccountFilter filterBy = BankAccountFilter.All)
+        public static Task<List<BankAccount>> GetBankAccountsAsync(this FreeAgentClient client, BankAccountFilter filterBy = BankAccountFilter.All)
         {
             var view = filterBy.GetMemberValue();
 
-            var result = await client.Execute(c => c.BankAccountList(client.Configuration.CurrentHeader, view));
-            return result.BankAccounts;
+            return client.GetOrCreateAsync(c => c.BankAccountList(client.Configuration.CurrentHeader, view), r => r.BankAccounts); 
         }
 
-        public static async Task<BankAccount> GetBankAccountAsync(this FreeAgentClient client, BankAccount account)
+        public static Task<BankAccount> GetBankAccountAsync(this FreeAgentClient client, BankAccount account)
         {
             var id = client.ExtractId(account);
-            return await client.GetBankAccountAsync(id);
+            return client.GetBankAccountAsync(id);
         }
 
-        public static async Task<BankAccount> GetBankAccountAsync(this FreeAgentClient client, Uri url)
+        public static Task<BankAccount> GetBankAccountAsync(this FreeAgentClient client, Uri url)
         {
             var id = client.ExtractId(url);
-            return await client.GetBankAccountAsync(id);
+            return client.GetBankAccountAsync(id);
         }
 
-        public static async Task<BankAccount> GetBankAccountAsync(this FreeAgentClient client, int accountId)
+        public static Task<BankAccount> GetBankAccountAsync(this FreeAgentClient client, int accountId)
         {
-            var result = await client.Execute(c => c.BankAccount(client.Configuration.CurrentHeader, accountId));
-            return result.BankAccount;
+            return client.GetOrCreateAsync(c => c.GetBankAccount(client.Configuration.CurrentHeader, accountId), r => r.BankAccount); 
         }
 
-        public static async Task<BankAccount> CreateBankAccountAsync(this FreeAgentClient client, BankAccount account)
+        public static Task<BankAccount> CreateBankAccountAsync(this FreeAgentClient client, BankAccount account)
         {
-            //TODO - safety stuff here...
-            var result = await client.Execute(c => c.CreateBankAccount(client.Configuration.CurrentHeader, account.Wrap()));
-            return result.BankAccount;
+            return client.GetOrCreateAsync(c => c.CreateBankAccount(client.Configuration.CurrentHeader, account.Wrap()), r => r.BankAccount); 
         }
 
-        public static async Task<bool> UpdateBankAccountAsync(this FreeAgentClient client, BankAccount account)
+        public static Task UpdateBankAccountAsync(this FreeAgentClient client, BankAccount account)
         {
-            var id = client.ExtractId(account);
-
-            await client.Execute(c => c.UpdateBankAccount(client.Configuration.CurrentHeader, id, account.Wrap()));
-            return true;
+            return client.UpdateOrDeleteAsync(account, (c, id) => c.UpdateBankAccount(client.Configuration.CurrentHeader, id, account.Wrap()));
         }
 
-        public static async Task<bool> DeleteBankAccountAsync(this FreeAgentClient client, BankAccount account)
+        public static Task DeleteBankAccountAsync(this FreeAgentClient client, BankAccount account)
         {
-            var id = client.ExtractId(account);
-
-            //TODO - safety stuff here??
-            await client.Execute(c => c.DeleteBankAccount(client.Configuration.CurrentHeader, id));
-            return true;
+            return client.UpdateOrDeleteAsync(account, (c, id) => c.DeleteBankAccount(client.Configuration.CurrentHeader, id));
         }
 
         internal static BankAccountWrapper Wrap(this BankAccount account)

@@ -6,16 +6,14 @@ namespace FreeAgent
 {
     public static class CompanyExtensions
     {
-        public static async Task<Company> GetCompanyAsync(this FreeAgentClient client)
+        public static Task<Company> GetCompanyAsync(this FreeAgentClient client)
         {
-            var result = await client.Execute(c => c.CompanyDetails(client.Configuration.CurrentHeader));
-            return result.Company;
+            return client.GetOrCreateAsync(c => c.CompanyDetails(client.Configuration.CurrentHeader), r => r.Company);
         }
 
-        public static async Task<List<TaxTimeline>> GetTaxTimelinesAsync(this FreeAgentClient client)
+        public static Task<List<TaxTimeline>> GetTaxTimelinesAsync(this FreeAgentClient client)
         {
-            var result = await client.Execute(c => c.TaxTimelines(client.Configuration.CurrentHeader));
-            return result.TimelineItems;
+            return client.GetOrCreateAsync(c => c.TaxTimelines(client.Configuration.CurrentHeader), r => r.TimelineItems); 
         }
     }
 }

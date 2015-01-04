@@ -58,9 +58,9 @@ namespace FreeAgent.Tests
 
             };
 
-            var result = await this.Client.ChangeInvoiceStatus(invoice, InvoiceStatus.Sent);
-            var result2 = await this.Client.ChangeInvoiceStatus(invoice, InvoiceStatus.Cancelled);
-            var result3 = await this.Client.ChangeInvoiceStatus(invoice, InvoiceStatus.Scheduled);
+            await this.Client.ChangeInvoiceStatus(invoice, InvoiceStatus.Sent);
+            await this.Client.ChangeInvoiceStatus(invoice, InvoiceStatus.Cancelled);
+            await this.Client.ChangeInvoiceStatus(invoice, InvoiceStatus.Scheduled);
         }
 
 

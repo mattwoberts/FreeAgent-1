@@ -75,7 +75,7 @@ namespace FreeAgent.Tests
         }
 
         [Test]
-        public async Task BankAccount_Update_Should_Return_Updated_Details()
+        public async Task BankAccount_Update_Should_Store_Updated_Details()
         {
             // arrange
             var source = Helper.NewStandardBankAccount();
@@ -85,13 +85,12 @@ namespace FreeAgent.Tests
 
             // act - update the one just created
             account.BankName = "*UPDATED*";
-            var result = await this.Client.UpdateBankAccountAsync(account);
+            await this.Client.UpdateBankAccountAsync(account);
 
             // assert
             var account2 = await this.Client.GetBankAccountAsync(account);
 
-            Assert.IsTrue(result);
-            Assert.AreEqual(account.Url, account2.Url);
+             Assert.AreEqual(account.Url, account2.Url);
             Assert.AreEqual(account.CreatedAt, account2.CreatedAt);
             Assert.AreEqual(account.BankName, account2.BankName);
             Assert.LessOrEqual(account.UpdatedAt, account2.UpdatedAt);

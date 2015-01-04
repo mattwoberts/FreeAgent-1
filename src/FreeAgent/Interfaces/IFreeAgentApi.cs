@@ -44,7 +44,7 @@ namespace FreeAgent
         Task<BankAccountWrapper> BankAccountList([Header("Authorization")] string authorization, string view);
 
         [Get("/bank_accounts/{id}")]
-        Task<BankAccountWrapper> BankAccount([Header("Authorization")] string authorization, int id);
+        Task<BankAccountWrapper> GetBankAccount([Header("Authorization")] string authorization, int id);
 
         [Post("/bank_accounts")]
         Task<BankAccountWrapper> CreateBankAccount([Header("Authorization")] string authorization, [Body] BankAccountWrapper account);
@@ -82,7 +82,7 @@ namespace FreeAgent
         Task<InvoiceWrapper> GetInvoice([Header("Authorization")] string authorization, int id);
 
         [Post("/invoices")]
-        Task<InvoiceWrapper> CreateInvoice([Header("Authorization")] string authorization, Invoice invoice);
+        Task<InvoiceWrapper> CreateInvoice([Header("Authorization")] string authorization, InvoiceWrapper invoice);
 
         [Put("/invoices/{id}/transitions/{transition}")]
         Task ChangeInvoiceStatus([Header("Authorization")] string authorization, int id, string transition);

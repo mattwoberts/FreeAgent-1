@@ -9,53 +9,44 @@ namespace FreeAgent
 {
     public static class ContactExtensions
     {
-        public static async Task<List<Contact>> GetContactsAsync(this FreeAgentClient client, ContactFilter filterBy = ContactFilter.All, ContactOrder orderBy = ContactOrder.Name)
+        public static Task<List<Contact>> GetContactsAsync(this FreeAgentClient client, ContactFilter filterBy = ContactFilter.All, ContactOrder orderBy = ContactOrder.Name)
         {
             var view = filterBy.GetMemberValue();
             var sort = orderBy.GetMemberValue();
 
-            var result = await client.Execute(c => c.ContactList(client.Configuration.CurrentHeader, view, sort));
-            return result.Contacts;
+            return client.GetOrCreateAsync(c => c.ContactList(client.Configuration.CurrentHeader, view, sort), r => r.Contacts); 
         }
 
-        public static async Task<Contact> CreateContactAsync(this FreeAgentClient client, Contact contact)
+        public static Task<Contact> CreateContactAsync(this FreeAgentClient client, Contact contact)
         {
-            var result = await client.Execute(c => c.CreateContact(client.Configuration.CurrentHeader, contact.Wrap()));
-            return result.Contact;
+            return client.GetOrCreateAsync(c => c.CreateContact(client.Configuration.CurrentHeader, contact.Wrap()), r => r.Contact); 
         }
 
-        public static async Task<bool> UpdateContactAsync(this FreeAgentClient client, Contact contact)
+        public static Task UpdateContactAsync(this FreeAgentClient client, Contact contact)
         {
-            var id = client.ExtractId(contact);
-
-            await client.Execute(c => c.UpdateContact(client.Configuration.CurrentHeader, id, contact.Wrap()));
-            return true;
+            return client.UpdateOrDeleteAsync(contact, (c, id) => c.UpdateContact(client.Configuration.CurrentHeader, id, contact.Wrap()));
         }
 
-        public static async Task<Contact> GetContactAsync(this FreeAgentClient client, Contact contact)
+        public static Task<Contact> GetContactAsync(this FreeAgentClient client, Contact contact)
         {
             var id = client.ExtractId(contact);
-            return await client.GetContactAsync(id);
+            return client.GetContactAsync(id);
         }
 
-        public static async Task<Contact> GetContactAsync(this FreeAgentClient client, Uri url)
+        public static Task<Contact> GetContactAsync(this FreeAgentClient client, Uri url)
         {
             var id = client.ExtractId(url);
-            return await client.GetContactAsync(id);
+            return client.GetContactAsync(id);
         }
 
-        public static async Task<Contact> GetContactAsync(this FreeAgentClient client, int contactId)
+        public static Task<Contact> GetContactAsync(this FreeAgentClient client, int contactId)
         {
-            var result = await client.Execute(c => c.GetContact(client.Configuration.CurrentHeader, contactId));
-            return result.Contact;
+            return client.GetOrCreateAsync(c => c.GetContact(client.Configuration.CurrentHeader, contactId), r => r.Contact); 
         }
 
-        public static async Task<bool> DeleteContactAsync(this FreeAgentClient client, Contact contact)
+        public static Task DeleteContactAsync(this FreeAgentClient client, Contact contact)
         {
-            var id = client.ExtractId(contact);
-
-            await client.Execute(c => c.DeleteContact(client.Configuration.CurrentHeader, id));
-            return true;
+            return client.UpdateOrDeleteAsync(contact, (c,id) => c.DeleteContact(client.Configuration.CurrentHeader, id));
         }
 
         internal static ContactWrapper Wrap(this Contact contact)

@@ -8,51 +8,43 @@ namespace FreeAgent
 {
     public static class NoteExtensions
     {
-        public static async Task<List<NoteItem>> GetNotesAsync(this FreeAgentClient client, Contact contact)
+        public static Task<List<NoteItem>> GetNotesAsync(this FreeAgentClient client, Contact contact)
         {
             var url = client.ExtractUrl(contact);
-
-            var result = await client.Execute(c => c.NoteList(client.Configuration.CurrentHeader, url.OriginalString, null));
-            return result.Notes;
+            return client.GetOrCreateAsync(c => c.NoteList(client.Configuration.CurrentHeader, url.OriginalString, null), r => r.Notes);
         }
 
-        public static async Task<List<NoteItem>> GetNotesAsync(this FreeAgentClient client, Project project)
+        public static Task<List<NoteItem>> GetNotesAsync(this FreeAgentClient client, Project project)
         {
             var url = client.ExtractUrl(project);
-            var result = await client.Execute(c => c.NoteList(client.Configuration.CurrentHeader, null, url.OriginalString));
-            return result.Notes;
+            return client.GetOrCreateAsync(c => c.NoteList(client.Configuration.CurrentHeader, null, url.OriginalString), r => r.Notes); 
         }
 
-        public static async Task<NoteItem> GetNoteAsync(this FreeAgentClient client, NoteItem note)
+        public static Task<NoteItem> GetNoteAsync(this FreeAgentClient client, NoteItem note)
         {
             var id = client.ExtractId(note);
-            return await client.GetNoteAsync(id);
+            return client.GetNoteAsync(id);
         }
 
-        public static async Task<NoteItem> GetNoteAsync(this FreeAgentClient client, Uri url)
+        public static Task<NoteItem> GetNoteAsync(this FreeAgentClient client, Uri url)
         {
             var id = client.ExtractId(url);
-            return await client.GetNoteAsync(id);
+            return client.GetNoteAsync(id);
         }
 
-        public static async Task<NoteItem> GetNoteAsync(this FreeAgentClient client, int noteId)
+        public static Task<NoteItem> GetNoteAsync(this FreeAgentClient client, int noteId)
         {
-            var result = await client.Execute(c => c.GetNote(client.Configuration.CurrentHeader, noteId));
-            return result.Note;
+            return client.GetOrCreateAsync(c => c.GetNote(client.Configuration.CurrentHeader, noteId), r => r.Note); 
         }
 
-        public static async Task<bool> DeleteNoteAsync(this FreeAgentClient client, NoteItem note)
+        public static Task DeleteNoteAsync(this FreeAgentClient client, NoteItem note)
         {
-            var id = client.ExtractId(note);
-
-            await client.Execute(c => c.DeleteNote(client.Configuration.CurrentHeader, id));
-            return true;
+            return client.UpdateOrDeleteAsync(note, (c, id) => c.DeleteNote(client.Configuration.CurrentHeader, id));
         }
 
         internal static NoteItemWrapper Wrap(this NoteItem note)
         {
             return new NoteItemWrapper { Note = note };
         }
-
     }
 }

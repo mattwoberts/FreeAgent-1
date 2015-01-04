@@ -1,84 +1,70 @@
 ﻿using FreeAgent.Model;
 using System;
-using System.Threading.Tasks;
-using FreeAgent.Helpers;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace FreeAgent
 {
     public static class TimeslipExtensions
     {
-        public static async Task<List<Timeslip>> GetTimeSlipsAsync(this FreeAgentClient client, DateTime? fromDate = null, DateTime? toDate = null)
+        public static Task<List<Timeslip>> GetTimeSlipsAsync(this FreeAgentClient client, DateTime? fromDate = null, DateTime? toDate = null)
         {
-            var result = await client.Execute(c => c.TimeslipList(client.Configuration.CurrentHeader, null, null, null, fromDate, toDate));
-            return result.Timeslips;
+            return client.GetOrCreateAsync(c => c.TimeslipList(client.Configuration.CurrentHeader, null, null, null, fromDate, toDate), r => r.Timeslips);
         }
 
-        public static async Task<List<Timeslip>> GetTimeSlipsAsync(this FreeAgentClient client, User user)
+        public static Task<List<Timeslip>> GetTimeSlipsAsync(this FreeAgentClient client, User user)
         {
             var url = client.ExtractUrl(user);
-            var result = await client.Execute(c => c.TimeslipList(client.Configuration.CurrentHeader, url.OriginalString, null, null, null, null));
-            return result.Timeslips;
+            return client.GetOrCreateAsync(c => c.TimeslipList(client.Configuration.CurrentHeader, url.OriginalString, null, null, null, null), r => r.Timeslips);
         }
 
-        public static async Task<List<Timeslip>> GetTimeSlipsAsync(this FreeAgentClient client, TaskItem task)
+        public static Task<List<Timeslip>> GetTimeSlipsAsync(this FreeAgentClient client, TaskItem task)
         {
             var url = client.ExtractUrl(task);
-            var result = await client.Execute(c => c.TimeslipList(client.Configuration.CurrentHeader, null, url.OriginalString, null, null, null));
-            return result.Timeslips;
+            return client.GetOrCreateAsync(c => c.TimeslipList(client.Configuration.CurrentHeader, null, url.OriginalString, null, null, null), r => r.Timeslips);
         }
 
-        public static async Task<List<Timeslip>> GetTimeSlipsAsync(this FreeAgentClient client, Project project)
+        public static Task<List<Timeslip>> GetTimeSlipsAsync(this FreeAgentClient client, Project project)
         {
             var url = client.ExtractUrl(project);
-            var result = await client.Execute(c => c.TimeslipList(client.Configuration.CurrentHeader, null, null, url.OriginalString, null, null));
-            return result.Timeslips;
+            return client.GetOrCreateAsync(c => c.TimeslipList(client.Configuration.CurrentHeader, null, null, url.OriginalString, null, null), r => r.Timeslips);
         }
 
-        public static async Task<Timeslip> GetTimeslipAsync(this FreeAgentClient client, Timeslip timeslip)
+        public static Task<Timeslip> GetTimeslipAsync(this FreeAgentClient client, Timeslip timeslip)
         {
             var id = client.ExtractId(timeslip);
-            return await client.GetTimeslipAsync(id);
+            return client.GetTimeslipAsync(id);
         }
 
-        public static async Task<Timeslip> GetTimeslipAsync(this FreeAgentClient client, Uri url)
+        public static Task<Timeslip> GetTimeslipAsync(this FreeAgentClient client, Uri url)
         {
             var id = client.ExtractId(url);
-            return await client.GetTimeslipAsync(id);
+            return client.GetTimeslipAsync(id);
         }
 
-        public static async Task<Timeslip> GetTimeslipAsync(this FreeAgentClient client, int timeslipId)
+        public static Task<Timeslip> GetTimeslipAsync(this FreeAgentClient client, int timeslipId)
         {
-            var result = await client.Execute(c => c.GetTimeslip(client.Configuration.CurrentHeader, timeslipId));
-            return result.Timeslip;
+            return client.GetOrCreateAsync(c => c.GetTimeslip(client.Configuration.CurrentHeader, timeslipId), r => r.Timeslip); 
         }
 
-        public static async Task<Timeslip> CreateTimeslipAsync(this FreeAgentClient client, Timeslip timeslip)
+        public static Task<Timeslip> CreateTimeslipAsync(this FreeAgentClient client, Timeslip timeslip)
         {
-            var result = await client.Execute(c => c.CreateTimeslips(client.Configuration.CurrentHeader, timeslip.Wrap()));
-            return result.Timeslip;
+            return client.GetOrCreateAsync(c => c.CreateTimeslips(client.Configuration.CurrentHeader, timeslip.Wrap()), r => r.Timeslip);
         }
 
-        public static async Task<List<Timeslip>> CreateTimeslipAsync(this FreeAgentClient client, List<Timeslip> timeslips)
+        public static Task<List<Timeslip>> CreateTimeslipAsync(this FreeAgentClient client, List<Timeslip> timeslips)
         {
-            var result = await client.Execute(c => c.CreateTimeslips(client.Configuration.CurrentHeader, timeslips.Wrap()));
-            return result.Timeslips;
+            return client.GetOrCreateAsync(c => c.CreateTimeslips(client.Configuration.CurrentHeader, timeslips.Wrap()), r => r.Timeslips);
         }
 
-        public static async Task<bool> UpdateTimeslipAsync(this FreeAgentClient client, Timeslip timeslip)
+        public static Task UpdateTimeslipAsync(this FreeAgentClient client, Timeslip timeslip)
         {
-            var id = client.ExtractId(timeslip);
-
-            await client.Execute(c => c.UpdateTimeslip(client.Configuration.CurrentHeader, id, timeslip.Wrap()));
-            return true;
+            return client.UpdateOrDeleteAsync(timeslip, (c, id) => c.UpdateTimeslip(client.Configuration.CurrentHeader, id, timeslip.Wrap()));
         }
 
-        public static async Task<bool> DeleteTimeslipAsync(this FreeAgentClient client, Timeslip timeslip)
+        public static Task DeleteTimeslipAsync(this FreeAgentClient client, Timeslip timeslip)
         {
-            var id = client.ExtractId(timeslip);
-
-            await client.Execute(c => c.DeleteNote(client.Configuration.CurrentHeader, id));
-            return true;
+            return client.UpdateOrDeleteAsync(timeslip, (c, id) => c.DeleteBankAccount(client.Configuration.CurrentHeader, id));
         }
 
         internal static TimeslipWrapper Wrap(this Timeslip timeslip)
