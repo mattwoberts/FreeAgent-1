@@ -53,6 +53,7 @@
     <Compile Include="Enums\TaskStatus.cs" />
     <Compile Include="Enums\UserRole.cs" />
     <Compile Include="Enums\UserPermission.cs" />
+    <Compile Include="ModelExtensions\BillExtensions.cs" />
     <Compile Include="ModelExtensions\TimeslipExtensions.cs" />
     <Compile Include="ModelExtensions\NoteExtensions.cs" />
     <Compile Include="ModelExtensions\CategoryExtensions.cs" />

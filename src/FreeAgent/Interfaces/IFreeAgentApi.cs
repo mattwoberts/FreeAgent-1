@@ -57,11 +57,24 @@ namespace FreeAgent
 
         #endregion bank accounts
 
+        #region bills
+
         [Get("/bills")]
-        Task<BillWrapper> BillList([Header("Authorization")] string authorization, string view = "all");
+        Task<BillWrapper> BillList([Header("Authorization")] string authorization, string view, string sort, DateTime? fromDate, DateTime? toDate);
+
+        [Post("/bills")]
+        Task<BillWrapper> CreateBill([Header("Authorization")] string authorization, [Body] BillWrapper contact);
+
+        [Put("/bills/{id}")]
+        Task UpdateBill([Header("Authorization")] string authorization, int id, [Body] BillWrapper contact);
 
         [Get("/bills/{id}")]
         Task<BillWrapper> GetBill([Header("Authorization")] string authorization, int id);
+
+        [Delete("/bills/{id}")]
+        Task DeleteBill([Header("Authorization")] string authorization, int id);
+
+        #endregion bills
 
         #region categories
 
