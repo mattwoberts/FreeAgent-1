@@ -223,6 +223,36 @@ namespace FreeAgent
             return (Task) methodImpls["DeleteNote"](Client, arguments);
         }
 
+        public virtual Task<TimeslipWrapper> TimeslipList(string authorization,string user,string task,string project,DateTime? from_date,DateTime? to_date)
+        {
+            var arguments = new object[] { authorization,user,task,project,from_date,to_date };
+            return (Task<TimeslipWrapper>) methodImpls["TimeslipList"](Client, arguments);
+        }
+
+        public virtual Task<TimeslipWrapper> CreateTimeslips(string authorization,TimeslipWrapper timeslip)
+        {
+            var arguments = new object[] { authorization,timeslip };
+            return (Task<TimeslipWrapper>) methodImpls["CreateTimeslips"](Client, arguments);
+        }
+
+        public virtual Task UpdateTimeslip(string authorization,int id,TimeslipWrapper contact)
+        {
+            var arguments = new object[] { authorization,id,contact };
+            return (Task) methodImpls["UpdateTimeslip"](Client, arguments);
+        }
+
+        public virtual Task<TimeslipWrapper> GetTimeslip(string authorization,int id)
+        {
+            var arguments = new object[] { authorization,id };
+            return (Task<TimeslipWrapper>) methodImpls["GetTimeslip"](Client, arguments);
+        }
+
+        public virtual Task DeleteTimeslip(string authorization,int id)
+        {
+            var arguments = new object[] { authorization,id };
+            return (Task) methodImpls["DeleteTimeslip"](Client, arguments);
+        }
+
     }
 }
 

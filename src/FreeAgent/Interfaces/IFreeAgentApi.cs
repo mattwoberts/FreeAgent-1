@@ -136,5 +136,25 @@ namespace FreeAgent
         Task DeleteNote([Header("Authorization")] string authorization, int id);
 
         #endregion notes
+
+        #region timeslips 
+
+        [Get("/timeslips")]
+        Task<TimeslipWrapper> TimeslipList([Header("Authorization")] string authorization, string user, string task, string project, DateTime? from_date, DateTime? to_date);
+
+        [Post("/timeslips")]
+        Task<TimeslipWrapper> CreateTimeslips([Header("Authorization")] string authorization, [Body] TimeslipWrapper timeslip);
+
+        [Put("/timeslips/{id}")]
+        Task UpdateTimeslip([Header("Authorization")] string authorization, int id, [Body] TimeslipWrapper contact);
+
+        [Get("/timeslips/{id}")]
+        Task<TimeslipWrapper> GetTimeslip([Header("Authorization")] string authorization, int id);
+
+        [Delete("/timeslips/{id}")]
+        Task DeleteTimeslip([Header("Authorization")] string authorization, int id);
+
+
+        #endregion timeslips
     }
 }
