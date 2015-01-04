@@ -63,10 +63,10 @@ namespace FreeAgent
         Task<BillWrapper> BillList([Header("Authorization")] string authorization, string view, string sort, DateTime? fromDate, DateTime? toDate);
 
         [Post("/bills")]
-        Task<BillWrapper> CreateBill([Header("Authorization")] string authorization, [Body] BillWrapper contact);
+        Task<BillWrapper> CreateBill([Header("Authorization")] string authorization, [Body] BillWrapper bill);
 
         [Put("/bills/{id}")]
-        Task UpdateBill([Header("Authorization")] string authorization, int id, [Body] BillWrapper contact);
+        Task UpdateBill([Header("Authorization")] string authorization, int id, [Body] BillWrapper bill);
 
         [Get("/bills/{id}")]
         Task<BillWrapper> GetBill([Header("Authorization")] string authorization, int id);
@@ -85,6 +85,25 @@ namespace FreeAgent
         Task<CategoryWrapper> GetCategory([Header("Authorization")] string authorization, string nominalCode);
 
         #endregion categories
+
+        #region expenses
+
+        [Get("/expenses")]
+        Task<ExpenseWrapper> ExpenseList([Header("Authorization")] string authorization, string view, DateTime? fromDate, DateTime? toDate);
+
+        [Post("/expenses")]
+        Task<ExpenseWrapper> CreateExpense([Header("Authorization")] string authorization, [Body] ExpenseWrapper expense);
+
+        [Put("/expenses/{id}")]
+        Task UpdateExpense([Header("Authorization")] string authorization, int id, [Body] ExpenseWrapper expense);
+
+        [Get("/expenses/{id}")]
+        Task<ExpenseWrapper> GetExpense([Header("Authorization")] string authorization, int id);
+
+        [Delete("/expenses/{id}")]
+        Task DeleteExpense([Header("Authorization")] string authorization, int id);
+
+        #endregion expenses
 
         #region invoices
 

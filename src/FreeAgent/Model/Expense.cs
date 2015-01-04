@@ -7,7 +7,6 @@ namespace FreeAgent.Model
 	{
         public Expense()
         {
-            HaveVatReceipt = false;
             EcStatus = ECStatus.None;
         }
 

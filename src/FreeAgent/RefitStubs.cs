@@ -79,10 +79,10 @@ namespace FreeAgent
             return (Task<BankAccountWrapper>) methodImpls["BankAccountList"](Client, arguments);
         }
 
-        public virtual Task<BankAccountWrapper> BankAccount(string authorization,int id)
+        public virtual Task<BankAccountWrapper> GetBankAccount(string authorization,int id)
         {
             var arguments = new object[] { authorization,id };
-            return (Task<BankAccountWrapper>) methodImpls["BankAccount"](Client, arguments);
+            return (Task<BankAccountWrapper>) methodImpls["GetBankAccount"](Client, arguments);
         }
 
         public virtual Task<BankAccountWrapper> CreateBankAccount(string authorization,BankAccountWrapper account)
@@ -103,16 +103,34 @@ namespace FreeAgent
             return (Task) methodImpls["DeleteBankAccount"](Client, arguments);
         }
 
-        public virtual Task<BillWrapper> BillList(string authorization,string view)
+        public virtual Task<BillWrapper> BillList(string authorization,string view,string sort,DateTime? fromDate,DateTime? toDate)
         {
-            var arguments = new object[] { authorization,view };
+            var arguments = new object[] { authorization,view,sort,fromDate,toDate };
             return (Task<BillWrapper>) methodImpls["BillList"](Client, arguments);
+        }
+
+        public virtual Task<BillWrapper> CreateBill(string authorization,BillWrapper bill)
+        {
+            var arguments = new object[] { authorization,bill };
+            return (Task<BillWrapper>) methodImpls["CreateBill"](Client, arguments);
+        }
+
+        public virtual Task UpdateBill(string authorization,int id,BillWrapper bill)
+        {
+            var arguments = new object[] { authorization,id,bill };
+            return (Task) methodImpls["UpdateBill"](Client, arguments);
         }
 
         public virtual Task<BillWrapper> GetBill(string authorization,int id)
         {
             var arguments = new object[] { authorization,id };
             return (Task<BillWrapper>) methodImpls["GetBill"](Client, arguments);
+        }
+
+        public virtual Task DeleteBill(string authorization,int id)
+        {
+            var arguments = new object[] { authorization,id };
+            return (Task) methodImpls["DeleteBill"](Client, arguments);
         }
 
         public virtual Task<Categories> CategoryList(string authorization)
@@ -127,6 +145,36 @@ namespace FreeAgent
             return (Task<CategoryWrapper>) methodImpls["GetCategory"](Client, arguments);
         }
 
+        public virtual Task<ExpenseWrapper> ExpenseList(string authorization,string view,DateTime? fromDate,DateTime? toDate)
+        {
+            var arguments = new object[] { authorization,view,fromDate,toDate };
+            return (Task<ExpenseWrapper>) methodImpls["ExpenseList"](Client, arguments);
+        }
+
+        public virtual Task<ExpenseWrapper> CreateExpense(string authorization,ExpenseWrapper expense)
+        {
+            var arguments = new object[] { authorization,expense };
+            return (Task<ExpenseWrapper>) methodImpls["CreateExpense"](Client, arguments);
+        }
+
+        public virtual Task UpdateExpense(string authorization,int id,ExpenseWrapper expense)
+        {
+            var arguments = new object[] { authorization,id,expense };
+            return (Task) methodImpls["UpdateExpense"](Client, arguments);
+        }
+
+        public virtual Task<ExpenseWrapper> GetExpense(string authorization,int id)
+        {
+            var arguments = new object[] { authorization,id };
+            return (Task<ExpenseWrapper>) methodImpls["GetExpense"](Client, arguments);
+        }
+
+        public virtual Task DeleteExpense(string authorization,int id)
+        {
+            var arguments = new object[] { authorization,id };
+            return (Task) methodImpls["DeleteExpense"](Client, arguments);
+        }
+
         public virtual Task<InvoiceWrapper> InvoiceList(string authorization,string view,string sort,bool nested_invoice_items)
         {
             var arguments = new object[] { authorization,view,sort,nested_invoice_items };
@@ -139,7 +187,7 @@ namespace FreeAgent
             return (Task<InvoiceWrapper>) methodImpls["GetInvoice"](Client, arguments);
         }
 
-        public virtual Task<InvoiceWrapper> CreateInvoice(string authorization,Invoice invoice)
+        public virtual Task<InvoiceWrapper> CreateInvoice(string authorization,InvoiceWrapper invoice)
         {
             var arguments = new object[] { authorization,invoice };
             return (Task<InvoiceWrapper>) methodImpls["CreateInvoice"](Client, arguments);
