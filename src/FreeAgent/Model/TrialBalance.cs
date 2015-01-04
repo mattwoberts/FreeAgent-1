@@ -3,17 +3,19 @@ using System.Collections.Generic;
 
 namespace FreeAgent.Model
 {
-	public class TrialBalanceSummary
+	public class TrialBalance
 	{
 		public Uri Category { get; set; }
 		public string NominalCode { get; set; }
 		public string Name { get; set; }
 		public float Total { get; set; }
+        public Uri BankAccount { get; set; }
+        public Uri User { get; set; }
 	}
 
-	public class TrialBalanceSummaryWrapper
+	public class TrialBalanceWrapper
 	{
-		public List<TrialBalanceSummary> TrialBalanceSummary { get; set; }
+		public List<TrialBalance> TrialBalanceSummary { get; set; }
 	}
 }
 

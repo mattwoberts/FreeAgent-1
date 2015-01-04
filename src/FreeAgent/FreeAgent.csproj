@@ -53,6 +53,7 @@
     <Compile Include="Enums\TaskStatus.cs" />
     <Compile Include="Enums\UserRole.cs" />
     <Compile Include="Enums\UserPermission.cs" />
+    <Compile Include="ModelExtensions\AccountingExtensions.cs" />
     <Compile Include="ModelExtensions\ExpenseExtensions.cs" />
     <Compile Include="ModelExtensions\BillExtensions.cs" />
     <Compile Include="ModelExtensions\TimeslipExtensions.cs" />
@@ -74,7 +75,7 @@
     <Compile Include="Interfaces\IFreeAgentApi.cs" />
     <Compile Include="Model\AccessRequest.cs" />
     <Compile Include="Model\AccessResponse.cs" />
-    <Compile Include="Model\Accounting.cs" />
+    <Compile Include="Model\TrialBalance.cs" />
     <Compile Include="Model\BankTransactionExplanation.cs" />
     <Compile Include="Model\BankTransaction.cs" />
     <Compile Include="Model\BankAccount.cs" />

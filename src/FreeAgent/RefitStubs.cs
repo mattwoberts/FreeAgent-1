@@ -49,6 +49,18 @@ namespace FreeAgent
             return (Task<AccessResponse>) methodImpls["RefreshAccessToken"](Client, arguments);
         }
 
+        public virtual Task<TrialBalanceWrapper> TrialBalanceList(string authorization,DateTime? date)
+        {
+            var arguments = new object[] { authorization,date };
+            return (Task<TrialBalanceWrapper>) methodImpls["TrialBalanceList"](Client, arguments);
+        }
+
+        public virtual Task<TrialBalanceWrapper> OpeningBalanceList(string authorization)
+        {
+            var arguments = new object[] { authorization };
+            return (Task<TrialBalanceWrapper>) methodImpls["OpeningBalanceList"](Client, arguments);
+        }
+
         public virtual Task<AttachmentWrapper> GetAttachment(string authorization,int id)
         {
             var arguments = new object[] { authorization,id };

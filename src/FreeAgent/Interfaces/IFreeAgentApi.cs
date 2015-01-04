@@ -18,6 +18,16 @@ namespace FreeAgent
 
         #endregion
 
+        #region accounting
+        
+        [Get("/accounting/trial_balance/summary")]
+        Task<TrialBalanceWrapper> TrialBalanceList([Header("Authorization")] string authorization, DateTime? date);
+
+        [Get("/accounting/trial_balance/summary/opening_balances")]
+        Task<TrialBalanceWrapper> OpeningBalanceList([Header("Authorization")] string authorization);
+
+        #endregion accounting 
+
         #region attachments
 
         [Get("/attachments/{id}")]
