@@ -11,7 +11,7 @@ namespace FreeAgent.Tests
     public class CompanyTests : TestFixtureBase
     {
         [Test]
-        public async Task CanRetrieveCompanyDetails()
+        public async Task Company_Can_Retrieve_Details()
         {
             // arrange
 
@@ -24,7 +24,7 @@ namespace FreeAgent.Tests
         }
 
         [Test]
-        public async Task GetTaxTimelinesReturnsListWithContent()
+        public async Task Company_Get_TaxTimelines_Returns_List_With_Content()
         {
             // arrange
 

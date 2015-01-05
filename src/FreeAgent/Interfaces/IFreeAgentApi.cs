@@ -86,6 +86,25 @@ namespace FreeAgent
 
         #endregion bills
 
+        #region contacts
+
+        [Get("/contacts")]
+        Task<ContactWrapper> ContactList([Header("Authorization")] string authorization, string view, string sort);
+
+        [Post("/contacts")]
+        Task<ContactWrapper> CreateContact([Header("Authorization")] string authorization, [Body] ContactWrapper contact);
+
+        [Put("/contacts/{id}")]
+        Task UpdateContact([Header("Authorization")] string authorization, int id, [Body] ContactWrapper contact);
+
+        [Get("/contacts/{id}")]
+        Task<ContactWrapper> GetContact([Header("Authorization")] string authorization, int id);
+
+        [Delete("/contacts/{id}")]
+        Task DeleteContact([Header("Authorization")] string authorization, int id);
+
+        #endregion contacts 
+
         #region categories
 
         [Get("/categories")]
@@ -121,13 +140,10 @@ namespace FreeAgent
         Task<InvoiceWrapper> InvoiceList([Header("Authorization")] string authorization, string view, string sort, bool nested_invoice_items = true);
 
         [Post("/invoices")]
-        Task<InvoiceWrapper> CreateProject([Header("Authorization")] string authorization, [Body] InvoiceWrapper invoice);
+        Task<InvoiceWrapper> CreateInvoice([Header("Authorization")] string authorization, [Body] InvoiceWrapper invoice);
 
         [Put("/invoices/{id}")]
-        Task UpdateContact([Header("Authorization")] string authorization, int id, [Body] InvoiceWrapper invoice);
-
-        [Post("/invoices")]
-        Task<InvoiceWrapper> CreateInvoice([Header("Authorization")] string authorization, InvoiceWrapper invoice);
+        Task UpdateInvoice([Header("Authorization")] string authorization, int id, [Body] InvoiceWrapper invoice);
 
         [Get("/invoice/{id}")]
         Task<InvoiceWrapper> GetInvoice([Header("Authorization")] string authorization, int id);
@@ -156,24 +172,15 @@ namespace FreeAgent
 
         #endregion
 
-        #region contacts
+        #region recurring invoices
 
-        [Get("/contacts")]
-        Task<ContactWrapper> ContactList([Header("Authorization")] string authorization, string view, string sort);
+        [Get("/recurring_invoices")]
+        Task<RecurringInvoiceWrapper> RecurringInvoiceList([Header("Authorization")] string authorization, string view, string sort, string contact);
 
-        [Post("/contacts")]
-        Task<ContactWrapper> CreateContact([Header("Authorization")] string authorization, [Body] ContactWrapper contact);
+        [Get("/recurring_invoice/{id}")]
+        Task<RecurringInvoiceWrapper> GetRecurringInvoice([Header("Authorization")] string authorization, int id);
 
-        [Put("/contacts/{id}")]
-        Task UpdateContact([Header("Authorization")] string authorization, int id, [Body] ContactWrapper contact);
-
-        [Get("/contacts/{id}")]
-        Task<ContactWrapper> GetContact([Header("Authorization")] string authorization, int id);
-
-        [Delete("/contacts/{id}")]
-        Task DeleteContact([Header("Authorization")] string authorization, int id);
-
-        #endregion
+        #endregion recurring invoices 
 
         #region notes 
 

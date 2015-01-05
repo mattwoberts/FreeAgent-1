@@ -39,10 +39,12 @@
     <Compile Include="Enums\AccessRequestType.cs" />
     <Compile Include="Enums\AttachmentContentType.cs" />
     <Compile Include="Enums\BankAccountType.cs" />
+    <Compile Include="Enums\Frequency.cs" />
     <Compile Include="Enums\Currency.cs" />
     <Compile Include="Enums\ECStatus.cs" />
     <Compile Include="Enums\InvoiceItemType.cs" />
     <Compile Include="Enums\InvoiceECStatus.cs" />
+    <Compile Include="Enums\RecurringInvoiceStatus.cs" />
     <Compile Include="Enums\InvoiceStatus.cs" />
     <Compile Include="Enums\ProjectStatus.cs" />
     <Compile Include="Enums\BudgetUnits.cs" />
@@ -56,6 +58,7 @@
     <Compile Include="ModelExtensions\AccountingExtensions.cs" />
     <Compile Include="ModelExtensions\ExpenseExtensions.cs" />
     <Compile Include="ModelExtensions\BillExtensions.cs" />
+    <Compile Include="ModelExtensions\RecurringInvoiceExtensions.cs" />
     <Compile Include="ModelExtensions\StockItemExtensions.cs" />
     <Compile Include="ModelExtensions\UserExtensions.cs" />
     <Compile Include="ModelExtensions\TimeslipExtensions.cs" />
@@ -77,6 +80,8 @@
     <Compile Include="Interfaces\IFreeAgentApi.cs" />
     <Compile Include="Model\AccessRequest.cs" />
     <Compile Include="Model\AccessResponse.cs" />
+    <Compile Include="Model\RecurringInvoice.cs" />
+    <Compile Include="Model\InvoiceItem.cs" />
     <Compile Include="Model\StockItem.cs" />
     <Compile Include="Model\TrialBalance.cs" />
     <Compile Include="Model\BankTransactionExplanation.cs" />

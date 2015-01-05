@@ -75,6 +75,7 @@
     <Compile Include="Helpers\ConfigurationHelper.cs" />
     <Compile Include="Helpers\ContactHelper.cs" />
     <Compile Include="Helpers\BankHelper.cs" />
+    <Compile Include="RecurringInvoiceTests.cs" />
     <Compile Include="ProjectTests.cs" />
     <Compile Include="ExtensionTests.cs" />
     <Compile Include="TestFixtureBase.cs" />
