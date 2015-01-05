@@ -33,14 +33,14 @@ namespace FreeAgent.Model
 		public double ManualSalesTaxAmount { get; set; }//?
 		public double SecondSalesTaxRate { get; set; }//?
 		public ECStatus EcStatus { get; set; }//?
-		public string Status { get; set; } // should be an enum...
+		public BillStatus Status { get; set; } 
         public Uri RebillToProject { get; set; }
-		public string RebillType { get; set; }// enum - markup, other values
-		public double RebillFactor { get; set;}
-        public Frequency Recurring { get; set; } //
+		public RebillType RebillType { get; set; }
+		public double RebillFactor { get; set;}//?
+        public Frequency Recurring { get; set; } 
 
         [JsonConverter(typeof(IsoDateConverter))]
-        public DateTime? RecurringEndDate { get; set; } //
+        public DateTime? RecurringEndDate { get; set; } 
 
         public string Comments { get; set; }
 		public string DepreciationSchedule { get; set; }//?

@@ -39,6 +39,7 @@
     <Compile Include="Enums\AccessRequestType.cs" />
     <Compile Include="Enums\AttachmentContentType.cs" />
     <Compile Include="Enums\BankAccountType.cs" />
+    <Compile Include="Enums\RebillType.cs" />
     <Compile Include="Enums\Frequency.cs" />
     <Compile Include="Enums\Currency.cs" />
     <Compile Include="Enums\ECStatus.cs" />
@@ -52,6 +53,7 @@
     <Compile Include="Enums\MileageUnits.cs" />
     <Compile Include="Enums\CompanyType.cs" />
     <Compile Include="Enums\BillingPeriod.cs" />
+    <Compile Include="Enums\BillStatus.cs" />
     <Compile Include="Enums\TaskStatus.cs" />
     <Compile Include="Enums\UserRole.cs" />
     <Compile Include="Enums\UserPermission.cs" />
