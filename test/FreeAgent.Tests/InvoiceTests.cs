@@ -11,26 +11,24 @@ namespace FreeAgent.Tests
     public class InvoiceTests : TestFixtureBase
     {
         [Test]
-        [Ignore]
         public async Task GetInvoices()
         {
             var invoices = await this.Client.GetInvoicesAsync();
+            var i = 0;
+            //var filter = InvoiceViewFilter.RecentOpenOrOverdue();
 
-            var filter = InvoiceViewFilter.RecentOpenOrOverdue();
+            //var openInvoices = await this.Client.GetInvoicesAsync(filter);
 
-            var openInvoices = await this.Client.GetInvoicesAsync(filter);
+            //var sortedFilter = InvoiceViewFilter.RecentOpenOrOverdue();
 
-            var sortedFilter = InvoiceViewFilter.RecentOpenOrOverdue();
-
-            var sortedInvoices = await this.Client.GetInvoicesAsync(sortedFilter, InvoiceOrder.CreatedAt); 
+            //var sortedInvoices = await this.Client.GetInvoicesAsync(sortedFilter, InvoiceOrder.CreatedAt); 
         }
 
         [Test]
-        [Ignore]
-        public void GetSingleInvoice()
+        public async Task GetSingleInvoice()
         {
-            
-
+            var invoice = await this.Client.GetInvoiceAsync(12121);
+            var i = 0;
         }
 
         [Test]

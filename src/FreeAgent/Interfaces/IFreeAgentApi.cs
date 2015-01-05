@@ -145,7 +145,7 @@ namespace FreeAgent
         [Put("/invoices/{id}")]
         Task UpdateInvoice([Header("Authorization")] string authorization, int id, [Body] InvoiceWrapper invoice);
 
-        [Get("/invoice/{id}")]
+        [Get("/invoices/{id}")]
         Task<InvoiceWrapper> GetInvoice([Header("Authorization")] string authorization, int id);
 
         [Put("/invoices/{id}/transitions/{transition}")]

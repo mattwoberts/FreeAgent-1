@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>FreeAgent.Net</id>
+        <version>0.2.0</version>
+        <title>.Net library for the FreeAgent API</title>
+        <authors>Dave Parker and Contributors</authors>
+        <owners>Arrowflex Design Ltd and Contributors</owners>
+        <licenseUrl>https://github.com/</licenseUrl>
+        <projectUrl>https://github.com/</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>.Net library for the FreeAgent API. This library allows you to perform all of the API methods against the FreeAgent API without needing to know JSON serialisation, oauth token expiration, etc.    See http://dev.freeagent.com/docs for API details.</description>
+        <summary>.Net library for the FreeAgent API</summary>
+        <releaseNotes>Initial public release.</releaseNotes>
+        <dependencies>
+            <dependency id="refit" version="2.2.0" />
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="lib\FreeAgent.dll" target="lib\FreeAgent.dll" />
+    </files>
+</package>

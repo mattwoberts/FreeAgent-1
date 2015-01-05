@@ -3,6 +3,7 @@ using FreeAgent.Helpers;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Threading.Tasks;
+using System;
 
 namespace FreeAgent
 {
@@ -19,6 +20,23 @@ namespace FreeAgent
         public static Task<Invoice> CreateInvoice(this FreeAgentClient client, Invoice invoice)
         {
             return client.GetOrCreateAsync(c => c.CreateInvoice(client.Configuration.CurrentHeader, invoice.Wrap()), r => r.Invoice); 
+        }
+
+        public static Task<Invoice> GetInvoiceAsync(this FreeAgentClient client, Invoice invoice)
+        {
+            var id = client.ExtractId(invoice);
+            return client.GetInvoiceAsync(id);
+        }
+
+        public static Task<Invoice> GetInvoiceAsync(this FreeAgentClient client, Uri url)
+        {
+            var id = client.ExtractId(url);
+            return client.GetInvoiceAsync(id);
+        }
+
+        public static Task<Invoice> GetInvoiceAsync(this FreeAgentClient client, int invoiceId)
+        {
+            return client.GetOrCreateAsync(c => c.GetInvoice(client.Configuration.CurrentHeader, invoiceId), r => r.Invoice);
         }
 
         public static Task ChangeInvoiceStatus(this FreeAgentClient client, Invoice invoice, InvoiceStatus newStatus)
