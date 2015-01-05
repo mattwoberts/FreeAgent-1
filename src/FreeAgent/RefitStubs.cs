@@ -193,10 +193,16 @@ namespace FreeAgent
             return (Task<InvoiceWrapper>) methodImpls["InvoiceList"](Client, arguments);
         }
 
-        public virtual Task<InvoiceWrapper> GetInvoice(string authorization,int id)
+        public virtual Task<InvoiceWrapper> CreateProject(string authorization,InvoiceWrapper invoice)
         {
-            var arguments = new object[] { authorization,id };
-            return (Task<InvoiceWrapper>) methodImpls["GetInvoice"](Client, arguments);
+            var arguments = new object[] { authorization,invoice };
+            return (Task<InvoiceWrapper>) methodImpls["CreateProject"](Client, arguments);
+        }
+
+        public virtual Task UpdateContact(string authorization,int id,InvoiceWrapper invoice)
+        {
+            var arguments = new object[] { authorization,id,invoice };
+            return (Task) methodImpls["UpdateContact"](Client, arguments);
         }
 
         public virtual Task<InvoiceWrapper> CreateInvoice(string authorization,InvoiceWrapper invoice)
@@ -205,22 +211,46 @@ namespace FreeAgent
             return (Task<InvoiceWrapper>) methodImpls["CreateInvoice"](Client, arguments);
         }
 
+        public virtual Task<InvoiceWrapper> GetInvoice(string authorization,int id)
+        {
+            var arguments = new object[] { authorization,id };
+            return (Task<InvoiceWrapper>) methodImpls["GetInvoice"](Client, arguments);
+        }
+
         public virtual Task ChangeInvoiceStatus(string authorization,int id,string transition)
         {
             var arguments = new object[] { authorization,id,transition };
             return (Task) methodImpls["ChangeInvoiceStatus"](Client, arguments);
         }
 
-        public virtual Task<ProjectWrapper> ProjectList(string authorization,string view,string sort)
+        public virtual Task<ProjectWrapper> ProjectList(string authorization,string view,string sort,string contact)
         {
-            var arguments = new object[] { authorization,view,sort };
+            var arguments = new object[] { authorization,view,sort,contact };
             return (Task<ProjectWrapper>) methodImpls["ProjectList"](Client, arguments);
         }
 
-        public virtual Task<InvoiceWrapper> GetProject(string authorization,int id)
+        public virtual Task<ProjectWrapper> CreateProject(string authorization,ProjectWrapper project)
+        {
+            var arguments = new object[] { authorization,project };
+            return (Task<ProjectWrapper>) methodImpls["CreateProject"](Client, arguments);
+        }
+
+        public virtual Task UpdateProject(string authorization,int id,ProjectWrapper project)
+        {
+            var arguments = new object[] { authorization,id,project };
+            return (Task) methodImpls["UpdateProject"](Client, arguments);
+        }
+
+        public virtual Task<ProjectWrapper> GetProject(string authorization,int id)
         {
             var arguments = new object[] { authorization,id };
-            return (Task<InvoiceWrapper>) methodImpls["GetProject"](Client, arguments);
+            return (Task<ProjectWrapper>) methodImpls["GetProject"](Client, arguments);
+        }
+
+        public virtual Task DeleteProject(string authorization,int id)
+        {
+            var arguments = new object[] { authorization,id };
+            return (Task) methodImpls["DeleteProject"](Client, arguments);
         }
 
         public virtual Task<ContactWrapper> ContactList(string authorization,string view,string sort)

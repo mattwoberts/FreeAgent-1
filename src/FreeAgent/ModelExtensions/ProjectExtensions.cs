@@ -1,5 +1,6 @@
 ﻿using FreeAgent.Helpers;
 using FreeAgent.Model;
+using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Threading.Tasks;
@@ -13,7 +14,50 @@ namespace FreeAgent
             var view = filterBy.GetMemberValue();
             var sort = orderBy.GetMemberValue();
 
-            return client.GetOrCreateAsync(c => c.ProjectList(client.Configuration.CurrentHeader, view, sort), r => r.Projects); 
+            return client.GetOrCreateAsync(c => c.ProjectList(client.Configuration.CurrentHeader, view, sort, null), r => r.Projects); 
+        }
+
+        public static Task<List<Project>> GetProjectsAsync(this FreeAgentClient client, Contact contact)
+        {
+            var url = client.ExtractUrl(contact);
+            return client.GetOrCreateAsync(c => c.ProjectList(client.Configuration.CurrentHeader, null, null, url.OriginalString), r => r.Projects);
+        }
+
+        public static Task<Project> CreateProjectAsync(this FreeAgentClient client, Project contact)
+        {
+            return client.GetOrCreateAsync(c => c.CreateProject(client.Configuration.CurrentHeader, contact.Wrap()), r => r.Project);
+        }
+
+        public static Task UpdateProjectAsync(this FreeAgentClient client, Project contact)
+        {
+            return client.UpdateOrDeleteAsync(contact, (c, id) => c.UpdateProject(client.Configuration.CurrentHeader, id, contact.Wrap()));
+        }
+
+        public static Task<Project> GetProjectAsync(this FreeAgentClient client, Project contact)
+        {
+            var id = client.ExtractId(contact);
+            return client.GetProjectAsync(id);
+        }
+
+        public static Task<Project> GetProjectAsync(this FreeAgentClient client, Uri url)
+        {
+            var id = client.ExtractId(url);
+            return client.GetProjectAsync(id);
+        }
+
+        public static Task<Project> GetProjectAsync(this FreeAgentClient client, int projectId)
+        {
+            return client.GetOrCreateAsync(c => c.GetProject(client.Configuration.CurrentHeader, projectId), r => r.Project);
+        }
+
+        public static Task DeleteProjectAsync(this FreeAgentClient client, Contact project)
+        {
+            return client.UpdateOrDeleteAsync(project, (c, id) => c.DeleteContact(client.Configuration.CurrentHeader, id));
+        }
+
+        internal static ProjectWrapper Wrap(this Project project)
+        {
+            return new ProjectWrapper { Project = project };
         }
     }
 

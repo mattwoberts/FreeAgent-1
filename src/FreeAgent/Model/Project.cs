@@ -9,7 +9,7 @@ namespace FreeAgent.Model
 		{
 			Name = "";
 			Status = ProjectStatus.Active;
-			BudgetUnits = ProjectBudgetUnits.Hours;
+			BudgetUnits = BudgetUnits.Hours;
 			Currency = "GBP";
             BillingPeriod = BillingPeriod.Hour;
 		}
@@ -23,7 +23,7 @@ namespace FreeAgent.Model
 		public bool IsIr35 { get; set; }
 		public string ContractPoReference { get; set; }
         public ProjectStatus Status { get; set; }
-        public ProjectBudgetUnits BudgetUnits { get; set; }
+        public BudgetUnits BudgetUnits { get; set; }
 		public double NormalBillingRate { get; set; }
 		public double HoursPerDay { get; set; }
 		public bool UsesProjectInvoiceSequence { get; set; }

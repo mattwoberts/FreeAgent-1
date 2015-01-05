@@ -120,11 +120,17 @@ namespace FreeAgent
         [Get("/invoices")] 
         Task<InvoiceWrapper> InvoiceList([Header("Authorization")] string authorization, string view, string sort, bool nested_invoice_items = true);
 
-        [Get("/invoice/{id}")]
-        Task<InvoiceWrapper> GetInvoice([Header("Authorization")] string authorization, int id);
+        [Post("/invoices")]
+        Task<InvoiceWrapper> CreateProject([Header("Authorization")] string authorization, [Body] InvoiceWrapper invoice);
+
+        [Put("/invoices/{id}")]
+        Task UpdateContact([Header("Authorization")] string authorization, int id, [Body] InvoiceWrapper invoice);
 
         [Post("/invoices")]
         Task<InvoiceWrapper> CreateInvoice([Header("Authorization")] string authorization, InvoiceWrapper invoice);
+
+        [Get("/invoice/{id}")]
+        Task<InvoiceWrapper> GetInvoice([Header("Authorization")] string authorization, int id);
 
         [Put("/invoices/{id}/transitions/{transition}")]
         Task ChangeInvoiceStatus([Header("Authorization")] string authorization, int id, string transition);
@@ -134,10 +140,19 @@ namespace FreeAgent
         #region projects
 
         [Get("/projects")]
-        Task<ProjectWrapper> ProjectList([Header("Authorization")] string authorization, string view, string sort);
+        Task<ProjectWrapper> ProjectList([Header("Authorization")] string authorization, string view, string sort, string contact);
+
+        [Post("/projects")]
+        Task<ProjectWrapper> CreateProject([Header("Authorization")] string authorization, [Body] ProjectWrapper project);
+
+        [Put("/projects/{id}")]
+        Task UpdateProject([Header("Authorization")] string authorization, int id, [Body] ProjectWrapper project);
 
         [Get("/projects/{id}")]
-        Task<InvoiceWrapper> GetProject([Header("Authorization")] string authorization, int id);
+        Task<ProjectWrapper> GetProject([Header("Authorization")] string authorization, int id);
+
+        [Delete("/projects/{id}")]
+        Task DeleteProject([Header("Authorization")] string authorization, int id);
 
         #endregion
 
@@ -195,7 +210,6 @@ namespace FreeAgent
 
         [Delete("/timeslips/{id}")]
         Task DeleteTimeslip([Header("Authorization")] string authorization, int id);
-
 
         #endregion timeslips
     }

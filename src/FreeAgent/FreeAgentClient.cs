@@ -12,20 +12,29 @@ namespace FreeAgent
 {
     public class FreeAgentClient
     {
-        public FreeAgentClient(string apiKey, string apiSecret, bool useSandBox, HttpClient httpClient = null)
+        public FreeAgentClient(bool useSandBox, string apiKey, string apiSecret, string refreshToken = null, HttpClient httpClient = null)
             : this(new Configuration() 
             {  
                 ApplicationKey = apiKey, 
                 ApplicationSecret = apiSecret, 
-                UseSandbox = useSandBox
-            }, httpClient)
+                UseSandbox = useSandBox,
+                RefreshToken = refreshToken
+            }, 
+            httpClient)
         {
         }
 
         public FreeAgentClient(Configuration config, HttpClient httpClient = null)
         {
+            // don't allow zero or negative auto refresh periods
+            if (config.AutoRefreshMinutes <= 0)
+            {
+                config.AutoRefreshMinutes = 120;
+            }
+
             this.Configuration = config;
 
+            // set the json converter to handle the underscores in the names and the string/enum values 
             JsonConvert.DefaultSettings =
                 () => new JsonSerializerSettings()
                 {
@@ -33,6 +42,7 @@ namespace FreeAgent
                     Converters = { new StringEnumConverter() }
                 };
 
+            // set the httpclient base address and configure the client
             var rootUrl = this.Configuration.UseSandbox ? "https://api.sandbox.freeagent.com/v2" : "https://api.freeagent.com/v2";
 
             if (httpClient != null)
@@ -97,15 +107,16 @@ namespace FreeAgent
         internal async Task RenewAccessIfRequired()
         {
             var tryRenewal = false;
-            var currentDate = DateTime.UtcNow; 
+            var currentDate = DateTime.UtcNow;
 
             if (!this.Configuration.CurrentTokenExpiry.HasValue)
+            {
                 tryRenewal = true;
-
+            }
             if (this.Configuration.CurrentTokenExpiry.HasValue)
             {
                 var timeToExpiry = this.Configuration.CurrentTokenExpiry.Value.Subtract(currentDate);
-                if (timeToExpiry.TotalSeconds < 120)
+                if (timeToExpiry.TotalSeconds < this.Configuration.AutoRefreshMinutes)
                     tryRenewal = true;
             }
 

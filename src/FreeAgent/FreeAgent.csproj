@@ -45,7 +45,7 @@
     <Compile Include="Enums\InvoiceECStatus.cs" />
     <Compile Include="Enums\InvoiceStatus.cs" />
     <Compile Include="Enums\ProjectStatus.cs" />
-    <Compile Include="Enums\ProjectBudgetUnits.cs" />
+    <Compile Include="Enums\BudgetUnits.cs" />
     <Compile Include="Enums\SalesTaxRegistrationStatus.cs" />
     <Compile Include="Enums\MileageUnits.cs" />
     <Compile Include="Enums\CompanyType.cs" />
