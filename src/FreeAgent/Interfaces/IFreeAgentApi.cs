@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FreeAgent
 {
-    [Headers("Accept: application/json", "Accept-Encoding: gzip, deflate", "User-Agent: FreeSharp/1.0.0.0")]
+    [Headers("Accept: application/json", "Accept-Encoding: gzip, deflate", "User-Agent: FreeAgent.Net/0.2.0.0")]
     internal interface IFreeAgentApi
     {
         #region Security / Tokens
