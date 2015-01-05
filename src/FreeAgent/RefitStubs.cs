@@ -313,6 +313,18 @@ namespace FreeAgent
             return (Task) methodImpls["DeleteNote"](Client, arguments);
         }
 
+        public virtual Task<StockItemWrapper> StockItemList(string authorization)
+        {
+            var arguments = new object[] { authorization };
+            return (Task<StockItemWrapper>) methodImpls["StockItemList"](Client, arguments);
+        }
+
+        public virtual Task<StockItemWrapper> GetStockItem(string authorization,int id)
+        {
+            var arguments = new object[] { authorization,id };
+            return (Task<StockItemWrapper>) methodImpls["GetStockItem"](Client, arguments);
+        }
+
         public virtual Task<TimeslipWrapper> TimeslipList(string authorization,string user,string task,string project,DateTime? from_date,DateTime? to_date)
         {
             var arguments = new object[] { authorization,user,task,project,from_date,to_date };
@@ -341,6 +353,48 @@ namespace FreeAgent
         {
             var arguments = new object[] { authorization,id };
             return (Task) methodImpls["DeleteTimeslip"](Client, arguments);
+        }
+
+        public virtual Task<UserWrapper> UserList(string authorization)
+        {
+            var arguments = new object[] { authorization };
+            return (Task<UserWrapper>) methodImpls["UserList"](Client, arguments);
+        }
+
+        public virtual Task<UserWrapper> CreateUser(string authorization,UserWrapper user)
+        {
+            var arguments = new object[] { authorization,user };
+            return (Task<UserWrapper>) methodImpls["CreateUser"](Client, arguments);
+        }
+
+        public virtual Task UpdateUser(string authorization,int id,UserWrapper user)
+        {
+            var arguments = new object[] { authorization,id,user };
+            return (Task) methodImpls["UpdateUser"](Client, arguments);
+        }
+
+        public virtual Task UpdateCurrentUser(string authorization,UserWrapper user)
+        {
+            var arguments = new object[] { authorization,user };
+            return (Task) methodImpls["UpdateCurrentUser"](Client, arguments);
+        }
+
+        public virtual Task<UserWrapper> GetUser(string authorization,int id)
+        {
+            var arguments = new object[] { authorization,id };
+            return (Task<UserWrapper>) methodImpls["GetUser"](Client, arguments);
+        }
+
+        public virtual Task<UserWrapper> GetCurrentUser(string authorization)
+        {
+            var arguments = new object[] { authorization };
+            return (Task<UserWrapper>) methodImpls["GetCurrentUser"](Client, arguments);
+        }
+
+        public virtual Task DeleteUser(string authorization,int id)
+        {
+            var arguments = new object[] { authorization,id };
+            return (Task) methodImpls["DeleteUser"](Client, arguments);
         }
 
     }

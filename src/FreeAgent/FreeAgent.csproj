@@ -56,6 +56,8 @@
     <Compile Include="ModelExtensions\AccountingExtensions.cs" />
     <Compile Include="ModelExtensions\ExpenseExtensions.cs" />
     <Compile Include="ModelExtensions\BillExtensions.cs" />
+    <Compile Include="ModelExtensions\StockItemExtensions.cs" />
+    <Compile Include="ModelExtensions\UserExtensions.cs" />
     <Compile Include="ModelExtensions\TimeslipExtensions.cs" />
     <Compile Include="ModelExtensions\NoteExtensions.cs" />
     <Compile Include="ModelExtensions\CategoryExtensions.cs" />
@@ -75,6 +77,7 @@
     <Compile Include="Interfaces\IFreeAgentApi.cs" />
     <Compile Include="Model\AccessRequest.cs" />
     <Compile Include="Model\AccessResponse.cs" />
+    <Compile Include="Model\StockItem.cs" />
     <Compile Include="Model\TrialBalance.cs" />
     <Compile Include="Model\BankTransactionExplanation.cs" />
     <Compile Include="Model\BankTransaction.cs" />

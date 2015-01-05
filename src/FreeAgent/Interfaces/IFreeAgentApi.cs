@@ -194,6 +194,16 @@ namespace FreeAgent
 
         #endregion notes
 
+        #region stockitems
+
+        [Get("/stock_items")]
+        Task<StockItemWrapper> StockItemList([Header("Authorization")] string authorization);
+
+        [Get("/stock_items/{id}")]
+        Task<StockItemWrapper> GetStockItem([Header("Authorization")] string authorization, int id);
+
+        #endregion stockitems
+
         #region timeslips 
 
         [Get("/timeslips")]
@@ -212,5 +222,31 @@ namespace FreeAgent
         Task DeleteTimeslip([Header("Authorization")] string authorization, int id);
 
         #endregion timeslips
+
+        #region users
+
+        [Get("/users")]
+        Task<UserWrapper> UserList([Header("Authorization")] string authorization);
+
+        [Post("/users")]
+        Task<UserWrapper> CreateUser([Header("Authorization")] string authorization, [Body] UserWrapper user);
+
+        [Put("/users/{id}")]
+        Task UpdateUser([Header("Authorization")] string authorization, int id, [Body] UserWrapper user);
+
+        [Put("/users/me")]
+        Task UpdateCurrentUser([Header("Authorization")] string authorization, [Body] UserWrapper user);
+
+        [Get("/users/{id}")]
+        Task<UserWrapper> GetUser([Header("Authorization")] string authorization, int id);
+
+        [Get("/users/me")]
+        Task<UserWrapper> GetCurrentUser([Header("Authorization")] string authorization);
+
+        [Delete("/users/{id}")]
+        Task DeleteUser([Header("Authorization")] string authorization, int id);
+
+        #endregion users 
+
     }
 }
