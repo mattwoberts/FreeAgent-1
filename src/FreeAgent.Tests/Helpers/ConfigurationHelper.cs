@@ -7,7 +7,7 @@ namespace FreeAgent.Tests
         {
             return new Configuration
             {
-                ApplicationKey = "gmUw3VSv7zFUjuSdA3TyyQ",
+                ApplicationKey = "gmUw3XSv7zFUjuSdA3TyyQ",
                 ApplicationSecret = "-Gm0CCdoTQmEnuhwEgkbOg",
                 RefreshToken = "1rUJbwc1-UBZEJDnEoE1n-UzO0Yck9dq30bHVoXIx",
                 UseSandbox = true,

@@ -1,8 +1,12 @@
 ## Cross Plaform C# FreeAgent library
 
-This library provides a portable, cross platform implementation of the [FreeAgent](http://freeagent.com) v2 api.  
+A portable, cross platform .Net library for accessing the [FreeAgent](http://freeagent.com) v2 API.  
 
-All access methods are async to provide the best possible support for mobile and UI heavy interfaces. 
+This library supports all *known* (because the documentation isn't always up to date!) capabilities of the API without you needing to worry about JSON serialisation, oauth token expiration, etc.    
+
+See [http://dev.freeagent.com/docs](http://dev.freeagent.com/docs) for API details.
+
+All methods are async so you get the best performance for mobile and UI heavy interfaces. 
 
 ## The Basics
 
@@ -16,7 +20,7 @@ var accounts = await client.GetBankAccounts();
 
 ### Where does this work?
 
-We use [refit](http://github.com/paulcbetts/refit) to handle the underlying rest calls, as a result this library currently supports the following platforms:
+We use the excellent [refit](http://github.com/paulcbetts/refit) library to handle the underlying rest calls, as a result this library currently supports the following platforms:
 
 * Xamarin.Android
 * Xamarin.Mac
@@ -30,4 +34,22 @@ The following platforms are not supported:
 
 * Xamarin.iOS 32-bit - build system doesn't support targets files
 
+### What's missing?
 
+* Cancellation Tokens - waiting for an update to refit.
+
+### What's still being worked on?
+
+Quite a few things as the API documentation and the actual API results occassionally differ.  I'm currently working on:
+
+* Verifying invoice behaviour
+* Bank Transactions
+* Bank Transaction Explanations
+* Lots of tests to verify the calls work 
+* Samples to show it working
+
+### Can I help?
+
+Sure, let me know or raise an issue if you find a problem.
+
+I've added everything in the API but I'm only using some of the functions right now.
