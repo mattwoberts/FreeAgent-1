@@ -40,7 +40,7 @@ namespace FreeAgent.Model
 	public class ExpenseWrapper
 	{
 		public Expense Expense { get; set; }
-        public List<Expense> Expenses { get; set; }
+        public IEnumerable<Expense> Expenses { get; set; }
     }
 }
 

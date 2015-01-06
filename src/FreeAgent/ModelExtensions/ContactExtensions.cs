@@ -9,7 +9,7 @@ namespace FreeAgent
 {
     public static class ContactExtensions
     {
-        public static Task<List<Contact>> GetContactsAsync(this FreeAgentClient client, ContactFilter filterBy = ContactFilter.All, ContactOrder orderBy = ContactOrder.Name)
+        public static Task<IEnumerable<Contact>> GetContactsAsync(this FreeAgentClient client, ContactFilter filterBy = ContactFilter.All, ContactOrder orderBy = ContactOrder.Name)
         {
             var view = filterBy.GetMemberValue();
             var sort = orderBy.GetMemberValue();

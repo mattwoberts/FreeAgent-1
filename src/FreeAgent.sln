@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeAgent", "src\FreeAgent\FreeAgent.csproj", "{70ED032B-695A-4E16-B7C0-88C697439C20}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeAgent", "FreeAgent\FreeAgent.csproj", "{70ED032B-695A-4E16-B7C0-88C697439C20}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeAgent.Tests", "test\FreeAgent.Tests\FreeAgent.Tests.csproj", "{5A290677-0D76-462F-88AD-3F67CDF55FC0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeAgent.Tests", "FreeAgent.Tests\FreeAgent.Tests.csproj", "{5A290677-0D76-462F-88AD-3F67CDF55FC0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

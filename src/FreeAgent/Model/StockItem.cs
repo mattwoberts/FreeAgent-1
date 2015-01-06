@@ -16,6 +16,6 @@ namespace FreeAgent.Model
 	public class StockItemWrapper
 	{
 		public StockItem StockItem { get; set; }
-        public List<StockItem> StockItems { get; set; }
+        public IEnumerable<StockItem> StockItems { get; set; }
     }
 }

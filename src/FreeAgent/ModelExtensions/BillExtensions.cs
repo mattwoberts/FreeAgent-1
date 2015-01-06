@@ -9,7 +9,7 @@ namespace FreeAgent
 {
     public static class BillExtensions
     {
-        public static Task<List<Bill>> GetBillsAsync(this FreeAgentClient client, BillFilter filterBy = BillFilter.All, BillOrder orderBy = BillOrder.DueDate, DateTime? fromDate = null, DateTime? toDate = null)
+        public static Task<IEnumerable<Bill>> GetBillsAsync(this FreeAgentClient client, BillFilter filterBy = BillFilter.All, BillOrder orderBy = BillOrder.DueDate, DateTime? fromDate = null, DateTime? toDate = null)
         {
             var view = filterBy.GetMemberValue();
             var sort = orderBy.GetMemberValue();

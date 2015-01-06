@@ -9,7 +9,7 @@ namespace FreeAgent
 {
     public static class BankAccountExtensions
     {
-        public static Task<List<BankAccount>> GetBankAccountsAsync(this FreeAgentClient client, BankAccountFilter filterBy = BankAccountFilter.All)
+        public static Task<IEnumerable<BankAccount>> GetBankAccountsAsync(this FreeAgentClient client, BankAccountFilter filterBy = BankAccountFilter.All)
         {
             var view = filterBy.GetMemberValue();
 

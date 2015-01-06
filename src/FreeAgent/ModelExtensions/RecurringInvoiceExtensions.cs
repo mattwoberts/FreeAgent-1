@@ -9,14 +9,14 @@ namespace FreeAgent
 {
     public static class RecurringInvoiceExtensions
     {
-        public static Task<List<RecurringInvoice>> GetRecurringInvoicesAsync(this FreeAgentClient client, RecurringInvoiceFilter filterBy = RecurringInvoiceFilter.All, RecurringInvoiceOrder orderBy = RecurringInvoiceOrder.NextRecursOn)
+        public static Task<IEnumerable<RecurringInvoice>> GetRecurringInvoicesAsync(this FreeAgentClient client, RecurringInvoiceFilter filterBy = RecurringInvoiceFilter.All, RecurringInvoiceOrder orderBy = RecurringInvoiceOrder.NextRecursOn)
         {
             var view = filterBy.GetMemberValue();
             var sort = orderBy.GetMemberValue();
             return client.GetOrCreateAsync(c => c.RecurringInvoiceList(client.Configuration.CurrentHeader, view, sort, null), r => r.RecurringInvoices); 
         }
 
-        public static Task<List<RecurringInvoice>> GetRecurringInvoicesAsync(this FreeAgentClient client, Contact contact)
+        public static Task<IEnumerable<RecurringInvoice>> GetRecurringInvoicesAsync(this FreeAgentClient client, Contact contact)
         {
             var url = client.ExtractUrl(contact);
             return client.GetOrCreateAsync(c => c.RecurringInvoiceList(client.Configuration.CurrentHeader, null, null, url.OriginalString), r => r.RecurringInvoices);

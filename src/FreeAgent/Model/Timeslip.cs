@@ -19,7 +19,7 @@ namespace FreeAgent.Model
 	public class TimeslipWrapper
 	{
 		public Timeslip Timeslip { get; set; }
-        public List<Timeslip> Timeslips { get; set; }
+        public IEnumerable<Timeslip> Timeslips { get; set; }
     }
 }
 

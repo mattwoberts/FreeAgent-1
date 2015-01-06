@@ -7,7 +7,7 @@ namespace FreeAgent
 {
     public static class StockItemExtensions
     {
-        public static Task<List<StockItem>> GetStockItemsAsync(this FreeAgentClient client)
+        public static Task<IEnumerable<StockItem>> GetStockItemsAsync(this FreeAgentClient client)
         {
             return client.GetOrCreateAsync(c => c.StockItemList(client.Configuration.CurrentHeader), r => r.StockItems);
         }

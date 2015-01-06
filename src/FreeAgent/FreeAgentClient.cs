@@ -35,24 +35,28 @@ namespace FreeAgent
             this.Configuration = config;
 
             // set the json converter to handle the underscores in the names and the string/enum values 
-            JsonConvert.DefaultSettings =
-                () => new JsonSerializerSettings()
+            var refitSettings = new RefitSettings
+            {
+                JsonSerializerSettings = new JsonSerializerSettings
                 {
                     ContractResolver = new SnakeCasePropertyNamesContractResolver(),
                     Converters = { new StringEnumConverter() }
-                };
+                }
+            };
 
             // set the httpclient base address and configure the client
-            var rootUrl = this.Configuration.UseSandbox ? "https://api.sandbox.freeagent.com/v2" : "https://api.freeagent.com/v2";
+            var rootUrl = this.Configuration.UseSandbox 
+                            ? "https://api.sandbox.freeagent.com/v2" 
+                            : "https://api.freeagent.com/v2";
 
             if (httpClient != null)
             {
                 httpClient.BaseAddress = new Uri(rootUrl);
-                this.FreeAgentApi = RestService.For<IFreeAgentApi>(httpClient);
+                this.FreeAgentApi = RestService.For<IFreeAgentApi>(httpClient, refitSettings);
             }
             else
             {
-                this.FreeAgentApi = RestService.For<IFreeAgentApi>(rootUrl);
+                this.FreeAgentApi = RestService.For<IFreeAgentApi>(rootUrl, refitSettings);
             }
         }
 

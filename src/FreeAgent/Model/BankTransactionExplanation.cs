@@ -29,6 +29,6 @@ namespace FreeAgent.Model
 	public class BankTransactionExplanationWrapper
 	{
 		public BankTransactionExplanation BankTransactionExplanation { get; set; }
-        public List<BankTransactionExplanation> BankTransactionExplanations { get; set; }
+        public IEnumerable<BankTransactionExplanation> BankTransactionExplanations { get; set; }
     }
 }

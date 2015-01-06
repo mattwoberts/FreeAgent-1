@@ -11,7 +11,7 @@ namespace FreeAgent
             return client.GetOrCreateAsync(c => c.CompanyDetails(client.Configuration.CurrentHeader), r => r.Company);
         }
 
-        public static Task<List<TaxTimeline>> GetTaxTimelinesAsync(this FreeAgentClient client)
+        public static Task<IEnumerable<TaxTimeline>> GetTaxTimelinesAsync(this FreeAgentClient client)
         {
             return client.GetOrCreateAsync(c => c.TaxTimelines(client.Configuration.CurrentHeader), r => r.TimelineItems); 
         }

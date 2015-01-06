@@ -17,7 +17,7 @@ namespace FreeAgent.Model
 	public class TaskItemWrapper
 	{
 		public TaskItem Task { get; set; }
-        public List<TaskItem> Tasks { get; set; }
+        public IEnumerable<TaskItem> Tasks { get; set; }
     }
 }
 

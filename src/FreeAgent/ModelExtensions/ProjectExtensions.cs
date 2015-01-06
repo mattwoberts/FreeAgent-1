@@ -9,7 +9,7 @@ namespace FreeAgent
 {
     public static class ProjectExtensions
     {
-        public static Task<List<Project>> GetProjectsAsync(this FreeAgentClient client, ProjectFilter filterBy = ProjectFilter.All, ProjectOrder orderBy = ProjectOrder.Name)
+        public static Task<IEnumerable<Project>> GetProjectsAsync(this FreeAgentClient client, ProjectFilter filterBy = ProjectFilter.All, ProjectOrder orderBy = ProjectOrder.Name)
         {
             var view = filterBy.GetMemberValue();
             var sort = orderBy.GetMemberValue();
@@ -17,7 +17,7 @@ namespace FreeAgent
             return client.GetOrCreateAsync(c => c.ProjectList(client.Configuration.CurrentHeader, view, sort, null), r => r.Projects); 
         }
 
-        public static Task<List<Project>> GetProjectsAsync(this FreeAgentClient client, Contact contact)
+        public static Task<IEnumerable<Project>> GetProjectsAsync(this FreeAgentClient client, Contact contact)
         {
             var url = client.ExtractUrl(contact);
             return client.GetOrCreateAsync(c => c.ProjectList(client.Configuration.CurrentHeader, null, null, url.OriginalString), r => r.Projects);

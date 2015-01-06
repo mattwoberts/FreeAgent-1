@@ -17,6 +17,6 @@ namespace FreeAgent.Model
 	public class NoteItemWrapper
 	{
 		public NoteItem Note { get; set; }
-		public List<NoteItem> Notes { get; set; }
+        public IEnumerable<NoteItem> Notes { get; set; }
 	}
 }

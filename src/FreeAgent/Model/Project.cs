@@ -36,6 +36,6 @@ namespace FreeAgent.Model
 	public class ProjectWrapper
 	{
 		public Project Project { get; set; }
-        public List<Project> Projects { get; set; }
+        public IEnumerable<Project> Projects { get; set; }
     }
 }

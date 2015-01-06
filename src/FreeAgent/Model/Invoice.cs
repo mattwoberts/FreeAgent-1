@@ -50,7 +50,7 @@ namespace FreeAgent.Model
 	public class InvoiceWrapper
 	{
 		public Invoice Invoice { get; set; }
-		public List<Invoice> Invoices { get; set; }
+        public IEnumerable<Invoice> Invoices { get; set; }
 	}
 }
 

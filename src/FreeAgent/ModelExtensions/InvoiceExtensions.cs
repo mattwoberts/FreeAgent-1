@@ -9,7 +9,7 @@ namespace FreeAgent
 {
     public static class InvoiceExtensions
     {
-        public static Task<List<Invoice>> GetInvoicesAsync(this FreeAgentClient client, InvoiceViewFilter invoiceFilter = null, InvoiceOrder orderBy = InvoiceOrder.CreatedAt)
+        public static Task<IEnumerable<Invoice>> GetInvoicesAsync(this FreeAgentClient client, InvoiceViewFilter invoiceFilter = null, InvoiceOrder orderBy = InvoiceOrder.CreatedAt)
         {
             var view = invoiceFilter ?? InvoiceViewFilter.RecentOpenOrOverdue();
             var sort = orderBy.GetMemberValue();

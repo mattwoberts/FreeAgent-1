@@ -16,6 +16,6 @@ namespace FreeAgent.Model
 
     public class TaxTimelineWrapper
     {
-        public List<TaxTimeline> TimelineItems { get; set; }
+        public IEnumerable<TaxTimeline> TimelineItems { get; set; }
     }
 }

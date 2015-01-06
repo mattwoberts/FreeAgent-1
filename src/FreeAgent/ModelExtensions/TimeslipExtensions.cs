@@ -7,24 +7,24 @@ namespace FreeAgent
 {
     public static class TimeslipExtensions
     {
-        public static Task<List<Timeslip>> GetTimeSlipsAsync(this FreeAgentClient client, DateTime? fromDate = null, DateTime? toDate = null)
+        public static Task<IEnumerable<Timeslip>> GetTimeSlipsAsync(this FreeAgentClient client, DateTime? fromDate = null, DateTime? toDate = null)
         {
             return client.GetOrCreateAsync(c => c.TimeslipList(client.Configuration.CurrentHeader, null, null, null, fromDate, toDate), r => r.Timeslips);
         }
 
-        public static Task<List<Timeslip>> GetTimeSlipsAsync(this FreeAgentClient client, User user)
+        public static Task<IEnumerable<Timeslip>> GetTimeSlipsAsync(this FreeAgentClient client, User user)
         {
             var url = client.ExtractUrl(user);
             return client.GetOrCreateAsync(c => c.TimeslipList(client.Configuration.CurrentHeader, url.OriginalString, null, null, null, null), r => r.Timeslips);
         }
 
-        public static Task<List<Timeslip>> GetTimeSlipsAsync(this FreeAgentClient client, TaskItem task)
+        public static Task<IEnumerable<Timeslip>> GetTimeSlipsAsync(this FreeAgentClient client, TaskItem task)
         {
             var url = client.ExtractUrl(task);
             return client.GetOrCreateAsync(c => c.TimeslipList(client.Configuration.CurrentHeader, null, url.OriginalString, null, null, null), r => r.Timeslips);
         }
 
-        public static Task<List<Timeslip>> GetTimeSlipsAsync(this FreeAgentClient client, Project project)
+        public static Task<IEnumerable<Timeslip>> GetTimeSlipsAsync(this FreeAgentClient client, Project project)
         {
             var url = client.ExtractUrl(project);
             return client.GetOrCreateAsync(c => c.TimeslipList(client.Configuration.CurrentHeader, null, null, url.OriginalString, null, null), r => r.Timeslips);
@@ -52,7 +52,7 @@ namespace FreeAgent
             return client.GetOrCreateAsync(c => c.CreateTimeslips(client.Configuration.CurrentHeader, timeslip.Wrap()), r => r.Timeslip);
         }
 
-        public static Task<List<Timeslip>> CreateTimeslipAsync(this FreeAgentClient client, List<Timeslip> timeslips)
+        public static Task<IEnumerable<Timeslip>> CreateTimeslipAsync(this FreeAgentClient client, List<Timeslip> timeslips)
         {
             return client.GetOrCreateAsync(c => c.CreateTimeslips(client.Configuration.CurrentHeader, timeslips.Wrap()), r => r.Timeslips);
         }

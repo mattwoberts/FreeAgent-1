@@ -17,6 +17,6 @@ namespace FreeAgent.Model
     public class AttachmentWrapper
     {
         public Attachment Attachment { get; set; }
-        public List<Attachment> Attachments { get; set; }
+        public IEnumerable<Attachment> Attachments { get; set; }
     }
 }

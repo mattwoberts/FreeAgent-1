@@ -7,7 +7,7 @@ namespace FreeAgent
 {
     public static class UserExtensions
     {
-        public static Task<List<User>> GetUsersAsync(this FreeAgentClient client)
+        public static Task<IEnumerable<User>> GetUsersAsync(this FreeAgentClient client)
         {
              return client.GetOrCreateAsync(c => c.UserList(client.Configuration.CurrentHeader), r => r.Users); 
         }

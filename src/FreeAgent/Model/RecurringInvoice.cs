@@ -37,7 +37,7 @@ namespace FreeAgent.Model
 	public class RecurringInvoiceWrapper
 	{
 		public RecurringInvoice RecurringInvoice { get; set; }
-		public List<RecurringInvoice> RecurringInvoices { get; set; }
+        public IEnumerable<RecurringInvoice> RecurringInvoices { get; set; }
 	}
 }
 

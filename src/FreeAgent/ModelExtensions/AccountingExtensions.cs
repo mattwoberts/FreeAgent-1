@@ -7,12 +7,12 @@ namespace FreeAgent
 {
     public static class AccountingExtensions
     {
-        public static Task<List<TrialBalance>> GetTrialBalanceAsync(this FreeAgentClient client, DateTime? date)
+        public static Task<IEnumerable<TrialBalance>> GetTrialBalanceAsync(this FreeAgentClient client, DateTime? date)
         {
             return client.GetOrCreateAsync(c => c.TrialBalanceList(client.Configuration.CurrentHeader, date), r => r.TrialBalanceSummary);
         }
 
-        public static Task<List<TrialBalance>> GetOpeningBalanceAsync(this FreeAgentClient client)
+        public static Task<IEnumerable<TrialBalance>> GetOpeningBalanceAsync(this FreeAgentClient client)
         {
             return client.GetOrCreateAsync(c => c.OpeningBalanceList(client.Configuration.CurrentHeader), r => r.TrialBalanceSummary); 
         }

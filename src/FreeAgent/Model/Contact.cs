@@ -32,6 +32,6 @@ namespace FreeAgent.Model
 	public class ContactWrapper
 	{
 		public Contact Contact { get; set; }
-		public List<Contact> Contacts { get; set; }
+		public IEnumerable<Contact> Contacts { get; set; }
 	}
 }

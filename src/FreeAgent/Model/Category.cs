@@ -15,10 +15,10 @@ namespace FreeAgent.Model
 
 	public class Categories
 	{
-		public List<Category> AdminExpensesCategories { get; set; }
-		public List<Category> CostOfSalesCategories { get; set; }
-		public List<Category> IncomeCategories { get; set; }
-		public List<Category> GeneralCategories { get; set; }
+        public IEnumerable<Category> AdminExpensesCategories { get; set; }
+        public IEnumerable<Category> CostOfSalesCategories { get; set; }
+        public IEnumerable<Category> IncomeCategories { get; set; }
+        public IEnumerable<Category> GeneralCategories { get; set; }
 	}
 
     public class CategoryWrapper

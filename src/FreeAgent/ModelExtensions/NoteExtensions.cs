@@ -8,13 +8,13 @@ namespace FreeAgent
 {
     public static class NoteExtensions
     {
-        public static Task<List<NoteItem>> GetNotesAsync(this FreeAgentClient client, Contact contact)
+        public static Task<IEnumerable<NoteItem>> GetNotesAsync(this FreeAgentClient client, Contact contact)
         {
             var url = client.ExtractUrl(contact);
             return client.GetOrCreateAsync(c => c.NoteList(client.Configuration.CurrentHeader, url.OriginalString, null), r => r.Notes);
         }
 
-        public static Task<List<NoteItem>> GetNotesAsync(this FreeAgentClient client, Project project)
+        public static Task<IEnumerable<NoteItem>> GetNotesAsync(this FreeAgentClient client, Project project)
         {
             var url = client.ExtractUrl(project);
             return client.GetOrCreateAsync(c => c.NoteList(client.Configuration.CurrentHeader, null, url.OriginalString), r => r.Notes); 

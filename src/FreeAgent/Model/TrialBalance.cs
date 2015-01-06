@@ -15,7 +15,7 @@ namespace FreeAgent.Model
 
 	public class TrialBalanceWrapper
 	{
-		public List<TrialBalance> TrialBalanceSummary { get; set; }
+		public IEnumerable<TrialBalance> TrialBalanceSummary { get; set; }
 	}
 }
 

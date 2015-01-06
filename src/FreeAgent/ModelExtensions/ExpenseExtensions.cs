@@ -9,7 +9,7 @@ namespace FreeAgent
 {
     public static class ExpenseExtensions
     {
-        public static Task<List<Expense>> GetExpensesAsync(this FreeAgentClient client, ExpenseFilter filterBy = ExpenseFilter.All, DateTime? fromDate = null, DateTime? toDate = null)
+        public static Task<IEnumerable<Expense>> GetExpensesAsync(this FreeAgentClient client, ExpenseFilter filterBy = ExpenseFilter.All, DateTime? fromDate = null, DateTime? toDate = null)
         {
             var view = filterBy.GetMemberValue();
             return client.GetOrCreateAsync(c => c.ExpenseList(client.Configuration.CurrentHeader, view, fromDate, toDate), r => r.Expenses); 
