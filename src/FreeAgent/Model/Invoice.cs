@@ -30,7 +30,7 @@ namespace FreeAgent.Model
 		public int PaymentTermsInDays { get; set; }
 		public string Currency { get; set; }
 		public InvoiceECStatus EcStatus { get; set; } 
-		public DateTime WrittenOffDate { get; set; } //?
+		public DateTime? WrittenOffDate { get; set; } //?
 		public double NetValue { get; set; }
 		public double SalesTaxValue { get; set; }
 		public double DueValue { get; set; }
