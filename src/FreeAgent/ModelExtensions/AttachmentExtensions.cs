@@ -1,6 +1,7 @@
 ﻿using FreeAgent.Model;
 using System;
 using System.Threading.Tasks;
+using FreeAgent.Helpers;
 
 namespace FreeAgent
 {
@@ -14,7 +15,7 @@ namespace FreeAgent
 
         public static Task<Attachment> GetAttachmentAsync(this FreeAgentClient client, Uri url)
         {
-            var id = client.ExtractId(url);
+            var id = url.GetId();
             return client.GetAttachmentAsync(id);
         }
 

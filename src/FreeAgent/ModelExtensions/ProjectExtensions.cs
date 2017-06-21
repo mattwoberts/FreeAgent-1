@@ -41,7 +41,7 @@ namespace FreeAgent
 
         public static Task<Project> GetProjectAsync(this FreeAgentClient client, Uri url)
         {
-            var id = client.ExtractId(url);
+            var id = url.GetId();
             return client.GetProjectAsync(id);
         }
 

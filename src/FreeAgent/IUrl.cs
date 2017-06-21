@@ -2,7 +2,7 @@
 
 namespace FreeAgent
 {
-    internal interface IUrl
+    public interface IUrl
     {
         Uri Url { get; }
     }

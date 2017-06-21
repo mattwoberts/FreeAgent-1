@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using FreeAgent.Helpers;
 
 namespace FreeAgent
 {
@@ -20,7 +21,7 @@ namespace FreeAgent
 
         public static Task<StockItem> GetStockItemAsync(this FreeAgentClient client, Uri url)
         {
-            var id = client.ExtractId(url);
+            var id = url.GetId();
             return client.GetStockItemAsync(id);
         }
 

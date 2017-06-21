@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using FreeAgent.Helpers;
 
 namespace FreeAgent
 {
@@ -35,7 +36,7 @@ namespace FreeAgent
 
         public static Task<User> GetUserAsync(this FreeAgentClient client, Uri url)
         {
-            var id = client.ExtractId(url);
+            var id = url.GetId();
             return client.GetUserAsync(id);
         }
 

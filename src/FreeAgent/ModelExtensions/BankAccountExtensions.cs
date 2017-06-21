@@ -24,7 +24,7 @@ namespace FreeAgent
 
         public static Task<BankAccount> GetBankAccountAsync(this FreeAgentClient client, Uri url)
         {
-            var id = client.ExtractId(url);
+            var id = url.GetId();
             return client.GetBankAccountAsync(id);
         }
 

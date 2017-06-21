@@ -155,27 +155,10 @@ namespace FreeAgent
 
         internal int ExtractId(IUrl model)
         {
-            if (model == null)
-                throw new FreeAgentException("Cannot extract ID from null model");
-
-            return ExtractId(model.Url);
+            return model.GetId();
         }
 
-        internal int ExtractId(Uri url)
-        {
-            if (url == null || url.Segments.Length <= 0)
-                throw new FreeAgentException("Cannot extract ID from blank Url");
-
-            var idVal = url.Segments.Last();
-
-            int id = 0;
-
-            if (!int.TryParse(idVal, out id))
-                throw new FreeAgentException(string.Format("Cannot extract ID, expected an integer [{0}]", url.AbsoluteUri));
-
-            return id;
-        }
-
+        
         public Configuration Configuration { get; private set;  }
         private IFreeAgentApi FreeAgentApi { get; set; }
     }

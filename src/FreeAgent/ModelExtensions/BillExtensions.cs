@@ -35,7 +35,7 @@ namespace FreeAgent
 
         public static Task<Bill> GetBillAsync(this FreeAgentClient client, Uri url)
         {
-            var id = client.ExtractId(url);
+            var id = url.GetId();
             return client.GetBillAsync(id);
         }
 
