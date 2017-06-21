@@ -11,24 +11,15 @@ namespace FreeAgent.Model
         public DateTime DatedOn { get; set; }
         public string Description { get; set; }
         public Uri Category { get; set; }
-
-//        public double manual_sales_tax_amount
-//        public double gross_value
-//        public double foreign_currency_value
-//rebill_type
-//rebill_factor
-//paid_invoice (Required when paying an invoice)
-//paid_bill (Required when paying a bill receipt)
-//paid_user (Required when paying a user)
-//transfer_bank_account (Required when transferring money between accounts)
-//asset_life_years (Required for capital asset purchase. The integer number of years over which the asset should be depreciated.)
-
+        public Uri PaidInvoice { get; set; }
         public Attachment Attachment { get; set; }
-	}
+	    public double GrossValue { get; set; }
+	    public double ForeignCurrencyValue { get; set; }
+    }
 
-	public class BankTransactionExplanationWrapper
+    public class BankTransactionExplanationWrapper
 	{
 		public BankTransactionExplanation BankTransactionExplanation { get; set; }
-        public IEnumerable<BankTransactionExplanation> BankTransactionExplanations { get; set; }
+        //public IEnumerable<BankTransactionExplanation> BankTransactionExplanations { get; set; }
     }
 }

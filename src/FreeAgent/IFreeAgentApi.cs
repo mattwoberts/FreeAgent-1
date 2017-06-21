@@ -67,6 +67,9 @@ namespace FreeAgent
 
         #endregion bank accounts
 
+        [Post("/bank_transaction_explanations")]
+        Task<BankTransactionExplanationWrapper> CreateBankTransactionExplanation([Header("Authorization")] string authorization, [Body] BankTransactionExplanationWrapper explanation);
+
         #region bills
 
         [Get("/bills")]
@@ -150,6 +153,9 @@ namespace FreeAgent
 
         [Put("/invoices/{id}/transitions/{transition}")]
         Task ChangeInvoiceStatus([Header("Authorization")] string authorization, int id, string transition);
+
+        [Post("/invoices/{id}/send_email")]
+        Task EmailInvoice([Header("Authorization")] string authorization, int id, [Body] InvoiceEmailWrapper invoice);
 
         #endregion
 

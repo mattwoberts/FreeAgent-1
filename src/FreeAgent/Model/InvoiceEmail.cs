@@ -11,7 +11,6 @@ namespace FreeAgent.Model
 		public string Body { get; set; }
 	}
 
-    //TODO - really?  need these??
     public class InvoiceEmailWrapper
     {
         public InvoiceEmail Invoice { get; set; }

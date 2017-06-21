@@ -22,6 +22,11 @@ namespace FreeAgent
             return client.GetOrCreateAsync(c => c.CreateInvoice(client.Configuration.CurrentHeader, invoice.Wrap()), r => r.Invoice); 
         }
 
+        public static Task CreateInvoiceEmail(this FreeAgentClient client, int invoiceId, InvoiceEmail email)
+        {
+            return client.Execute(c => c.EmailInvoice(client.Configuration.CurrentHeader, invoiceId, email.Wrap()));
+        }
+
         public static Task<Invoice> GetInvoiceAsync(this FreeAgentClient client, Invoice invoice)
         {
             var id = client.ExtractId(invoice);
@@ -30,7 +35,7 @@ namespace FreeAgent
 
         public static Task<Invoice> GetInvoiceAsync(this FreeAgentClient client, Uri url)
         {
-            var id = client.ExtractId(url);
+            var id = url.GetId();
             return client.GetInvoiceAsync(id);
         }
 
@@ -49,6 +54,12 @@ namespace FreeAgent
         {
             return new InvoiceWrapper { Invoice = invoice };
         }
+
+        internal static InvoiceEmailWrapper Wrap(this InvoiceEmail email)
+        {
+            return new InvoiceEmailWrapper { Invoice = email};
+        }
+
     }
 
     // TODO - revise this

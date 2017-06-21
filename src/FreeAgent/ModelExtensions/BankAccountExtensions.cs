@@ -38,6 +38,11 @@ namespace FreeAgent
             return client.GetOrCreateAsync(c => c.CreateBankAccount(client.Configuration.CurrentHeader, account.Wrap()), r => r.BankAccount); 
         }
 
+        public static Task<BankTransactionExplanation> CreateBankTransactionExplanationAsync(this FreeAgentClient client, BankTransactionExplanation explanation)
+        {
+            return client.GetOrCreateAsync(c => c.CreateBankTransactionExplanation(client.Configuration.CurrentHeader, explanation.Wrap()), r => r.BankTransactionExplanation);
+        }
+
         public static Task UpdateBankAccountAsync(this FreeAgentClient client, BankAccount account)
         {
             return client.UpdateOrDeleteAsync(account, (c, id) => c.UpdateBankAccount(client.Configuration.CurrentHeader, id, account.Wrap()));
@@ -51,6 +56,11 @@ namespace FreeAgent
         internal static BankAccountWrapper Wrap(this BankAccount account)
         {
             return new BankAccountWrapper { BankAccount = account };
+        }
+
+        internal static BankTransactionExplanationWrapper Wrap(this BankTransactionExplanation bankTransactionExplanation)
+        {
+            return new BankTransactionExplanationWrapper { BankTransactionExplanation = bankTransactionExplanation };
         }
     }
 
