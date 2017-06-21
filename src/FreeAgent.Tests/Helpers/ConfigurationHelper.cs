@@ -7,11 +7,11 @@ namespace FreeAgent.Tests
         {
             return new Configuration
             {
-                ApplicationKey = "gmUw3XSv7zFUjuSdA3TyyQ",
-                ApplicationSecret = "-Gm0CCdoTQmEnuhwEgkbOg",
-                RefreshToken = "1rUJbwc1-UBZEJDnEoE1n-UzO0Yck9dq30bHVoXIx",
+                ApplicationKey = "**AppKeyHere**",
+                ApplicationSecret = "**AppSecretHere**",
+                RefreshToken = "**RefreshTokenHere**",
                 UseSandbox = true,
-                CurrentToken = "1jrKxzaZ718hDCd4T-lKHIZEq0geycmjNNBV_yh9b"
+                CurrentToken = "**CurrentTokenHere**"
             };
         }
     }

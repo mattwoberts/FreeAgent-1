@@ -108,7 +108,7 @@ namespace FreeAgent
             }
         }
 
-        internal async Task RenewAccessIfRequired()
+        public async Task RenewAccessIfRequired()
         {
             var tryRenewal = false;
             var currentDate = DateTime.UtcNow;

@@ -70,8 +70,8 @@ namespace FreeAgent.Tests
             Assert.IsNotNull(contactByUrl);
             Assert.AreEqual(contact.Url, contactByUrl.Url);
             Assert.AreEqual(contact.Url, contactByObject.Url);
-            Assert.AreEqual(contact.CreatedAt, contactByUrl.CreatedAt);
-            Assert.AreEqual(contact.CreatedAt, contactByObject.CreatedAt);
+            Assert.AreEqual(contact.CreatedAt.Value.ToString("g"), contactByUrl.CreatedAt.Value.ToString("g"));
+            Assert.AreEqual(contact.CreatedAt.Value.ToString("g"), contactByObject.CreatedAt.Value.ToString("g"));
         }
 
         [Test]
@@ -91,9 +91,9 @@ namespace FreeAgent.Tests
             var contact2 = await this.Client.GetContactAsync(contact);
 
             Assert.AreEqual(contact.Url, contact2.Url);
-            Assert.AreEqual(contact.CreatedAt, contact2.CreatedAt);
+            Assert.AreEqual(contact.CreatedAt.Value.ToString("g"), contact2.CreatedAt.Value.ToString("g"));
             Assert.AreEqual(contact.Address2, contact2.Address2);
-            Assert.LessOrEqual(contact.UpdatedAt, contact2.UpdatedAt);
+            Assert.LessOrEqual(contact.UpdatedAt.Value.ToString("g"), contact2.UpdatedAt.Value.ToString("g"));
         }
 
         [Test]

@@ -32,7 +32,7 @@ namespace FreeAgent.Tests
         }
 
         [Test]
-        [Ignore]
+        [Ignore("")]
         public async Task CreateInvoice()
         {
 
@@ -46,7 +46,7 @@ namespace FreeAgent.Tests
         }
 
         [Test]
-        [Ignore]
+        [Ignore("")]
         public async Task MarkInvoiceAsSent()
         {
 
@@ -63,7 +63,7 @@ namespace FreeAgent.Tests
 
 
         [Test]
-        [Ignore]
+        [Ignore("")]
         public void UpdateInvoice()
         {
 

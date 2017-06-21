@@ -70,7 +70,7 @@ namespace FreeAgent.Tests
             // assert
             Assert.IsNotNull(result);
             Assert.AreEqual(account.Url, result.Url);
-            Assert.AreEqual(account.CreatedAt, result.CreatedAt);
+            Assert.AreEqual(account.CreatedAt.GetValueOrDefault(DateTime.MinValue).Date, result.CreatedAt.GetValueOrDefault(DateTime.MinValue).Date);
 
         }
 
@@ -90,8 +90,8 @@ namespace FreeAgent.Tests
             // assert
             var account2 = await this.Client.GetBankAccountAsync(account);
 
-             Assert.AreEqual(account.Url, account2.Url);
-            Assert.AreEqual(account.CreatedAt, account2.CreatedAt);
+            Assert.AreEqual(account.Url, account2.Url);
+            Assert.AreEqual(account.CreatedAt.GetValueOrDefault(DateTime.MinValue).Date, account2.CreatedAt.GetValueOrDefault(DateTime.MinValue).Date);
             Assert.AreEqual(account.BankName, account2.BankName);
             Assert.LessOrEqual(account.UpdatedAt, account2.UpdatedAt);
         }

@@ -70,30 +70,30 @@ namespace FreeAgent.Tests
             Assert.AreEqual(_testString, output);
         }
 
-        [Test]
-        public void ExtractId_Company_Url_Should_Throw_ID_Exception()
-        {
-            // arrange
-            var client = new FreeAgentClient(Helper.Configuration());
-            var test = new TestUrl 
-            { 
-                Url = new Uri("https://api.freeagent.com/v2/company")
-            };
+//        [Test]
+//        public void ExtractId_Company_Url_Should_Throw_ID_Exception()
+//        {
+//            // arrange
+//            var client = new FreeAgentClient(Helper.Configuration());
+//            var test = new TestUrl 
+//            { 
+//                Url = new Uri("https://api.freeagent.com/v2/company")
+//            };
+//
+//            // act
+//            var ex = Helper.RecordException(() => client.ExtractId(test));
+//
+//            // assert
+//            Assert.AreEqual(3, test.Url.Segments.Length);
+//            Assert.AreEqual("company", test.Url.Segments.Last());
+//            Assert.IsNotNull(ex);
+//            Assert.IsInstanceOf<FreeAgentException>(ex);
+//            Assert.AreEqual("Cannot extract ID, expected an integer [https://api.freeagent.com/v2/company]", ex.Message);
+//        }
 
-            // act
-            var ex = Helper.RecordException(() => client.ExtractId(test));
-
-            // assert
-            Assert.AreEqual(3, test.Url.Segments.Length);
-            Assert.AreEqual("company", test.Url.Segments.Last());
-            Assert.IsNotNull(ex);
-            Assert.IsInstanceOf<FreeAgentException>(ex);
-            Assert.AreEqual("Cannot extract ID, expected an integer [https://api.freeagent.com/v2/company]", ex.Message);
-        }
-
-        public class TestUrl : IUrl
-        {
-            public Uri Url { get; set; }
-        }
+//        public class TestUrl : IUrl
+//        {
+//            public Uri Url { get; set; }
+//        }
     }
 }

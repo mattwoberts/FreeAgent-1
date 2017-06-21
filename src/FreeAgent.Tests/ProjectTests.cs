@@ -11,7 +11,7 @@ namespace FreeAgent.Tests
     public class ProjectTests : TestFixtureBase
     {
         [Test]
-        [Ignore]
+        [Ignore("")]
         public async Task GetProjects()
         {
             var invoices = await this.Client.GetInvoicesAsync();
@@ -27,7 +27,7 @@ namespace FreeAgent.Tests
         }
 
         [Test]
-        [Ignore]
+        [Ignore("")]
         public void GetSingleProject()
         {
             
@@ -35,7 +35,7 @@ namespace FreeAgent.Tests
         }
 
         [Test]
-        [Ignore]
+        [Ignore("")]
         public async Task CreateProject()
         {
 
@@ -49,7 +49,7 @@ namespace FreeAgent.Tests
         }
 
         //[Test]
-        //[Ignore]
+        //[Ignore("")]
         //public async Task MarkInvoiceAsSent()
         //{
 
@@ -64,7 +64,7 @@ namespace FreeAgent.Tests
 
 
         [Test]
-        [Ignore]
+        [Ignore("")]
         public void UpdateInvoice()
         {
 

@@ -10,7 +10,7 @@ namespace FreeAgent.Helpers
         readonly string separator;
 
         protected DeliminatorSeparatedPropertyNamesContractResolver(char separator)
-            : base(true)
+            : base()
         {
             this.separator = separator.ToString(); 
         }

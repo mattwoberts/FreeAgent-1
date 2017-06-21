@@ -20,7 +20,7 @@ namespace FreeAgent.Tests
 
             // assert
             Assert.IsNotNull(company);
-            Assert.IsNotNullOrEmpty(company.Name);
+            Assert.IsNotEmpty(company.Name);
         }
 
         [Test]
@@ -37,7 +37,7 @@ namespace FreeAgent.Tests
 
             foreach (TaxTimeline item in timelines)
             {
-                Assert.IsNotNullOrEmpty(item.Description);
+                Assert.IsNotEmpty(item.Description);
                 Assert.IsNotNull(item.DatedOn);
             }
         }
