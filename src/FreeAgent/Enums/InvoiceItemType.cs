@@ -18,7 +18,7 @@ namespace FreeAgent.Model
 		[EnumMember(Value = "Discount")] Discount,
 		[EnumMember(Value = "Credit")] Credit,
 		[EnumMember(Value = "VAT")] VAT,
-		[EnumMember(Value = "No Unit")] NoUnit
+		[EnumMember(Value = "-no unit-")] NoUnit
 	}
 }
 
