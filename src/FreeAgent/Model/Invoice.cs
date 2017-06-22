@@ -52,6 +52,19 @@ namespace FreeAgent.Model
 		public Invoice Invoice { get; set; }
         public IEnumerable<Invoice> Invoices { get; set; }
 	}
+
+    public class InvoicePdf
+    {
+        /// <summary>
+        /// Base 64 encoded PDF
+        /// </summary>
+        public string Content { get; set; }
+    }
+
+    public class InvoicePdfWrapper
+    {
+        public InvoicePdf Pdf { get; set; }
+    }
 }
 
 
