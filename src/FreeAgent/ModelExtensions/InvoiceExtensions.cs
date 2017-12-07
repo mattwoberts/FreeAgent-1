@@ -49,7 +49,7 @@ namespace FreeAgent
             return client.GetOrCreateAsync(c => c.GetInvoicePdf(client.Configuration.CurrentHeader, invoiceId), r => r.Pdf);
         }
 
-        public static Task ChangeInvoiceStatus(this FreeAgentClient client, Invoice invoice, InvoiceStatus newStatus)
+        public static Task ChangeInvoiceStatus(this FreeAgentClient client, Invoice invoice, MarkInvoiceSetting newStatus)
         {
             var newValue = "mark_as_" + newStatus.GetMemberValue().ToLowerInvariant();
             return client.UpdateOrDeleteAsync(invoice, (c, id) => c.ChangeInvoiceStatus(client.Configuration.CurrentHeader, id, newValue));
