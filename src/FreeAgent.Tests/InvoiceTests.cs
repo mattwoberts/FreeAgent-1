@@ -57,9 +57,9 @@ namespace FreeAgent.Tests
 
             };
 
-            await this.Client.ChangeInvoiceStatus(invoice, MarkInvoiceSetting.Sent);
-            await this.Client.ChangeInvoiceStatus(invoice, MarkInvoiceSetting.Cancelled);
-            await this.Client.ChangeInvoiceStatus(invoice, MarkInvoiceSetting.Scheduled);
+            await this.Client.ChangeInvoiceStatus(invoice, InvoiceStatus.Sent);
+            await this.Client.ChangeInvoiceStatus(invoice, InvoiceStatus.Cancelled);
+            await this.Client.ChangeInvoiceStatus(invoice, InvoiceStatus.Scheduled);
         }
 
 
@@ -123,8 +123,6 @@ namespace FreeAgent.Tests
                     {
                         Body = "Hello there, here you are.",
                         Subject = "Your invoice",
-                        From = "garethterrace@gmail.com",
-                        To = "garethterrace@gmail.com",
                     }
             };
 
