@@ -142,6 +142,9 @@ namespace FreeAgent
         [Get("/invoices")] 
         Task<InvoiceWrapper> InvoiceList([Header("Authorization")] string authorization, string view, string sort, bool nested_invoice_items = true);
 
+        [Get("/invoices?contact={contact}")]
+        Task<InvoiceWrapper> ListInvoicesForContact([Header("Authorization")] string authorization, string contact);
+
         [Post("/invoices")]
         Task<InvoiceWrapper> CreateInvoice([Header("Authorization")] string authorization, [Body] InvoiceWrapper invoice);
 
@@ -159,6 +162,7 @@ namespace FreeAgent
 
         [Post("/invoices/{id}/send_email")]
         Task EmailInvoice([Header("Authorization")] string authorization, int id, [Body] InvoiceEmailWrapper invoice);
+                
 
         #endregion
 

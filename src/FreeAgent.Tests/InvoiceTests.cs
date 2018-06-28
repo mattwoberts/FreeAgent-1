@@ -71,11 +71,26 @@ namespace FreeAgent.Tests
 
         }
 
+        [Test]
+        public async Task CanGetInvoicesForContact()
+        {
+            //Pre load a contact in the sandbox with some invoices, then put their ID here:
+            var contactId = 45471;
+
+            //We only actually need the URI but this validates the contact exists and the client can connect
+            var contact = await this.Client.GetContactAsync(contactId);
+            Assert.NotNull(contact);
+
+
+            var invoices = await this.Client.ListInvoicesForContactAsync(contact.Url.ToString());
+            
+            Assert.That(invoices.Count(), Is.EqualTo(3));
+        }
 
         [Test]
         public async Task CanRaiseInvoiceAndBankExplanation()
         {
-            // Create a rnadom contact:
+            // Create a random contact:
             var source = Helper.NewContact();
             var contact = await this.Client.CreateContactAsync(source);
             Assert.NotNull(contact.Url);

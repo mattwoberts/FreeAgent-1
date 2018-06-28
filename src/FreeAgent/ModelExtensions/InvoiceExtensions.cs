@@ -17,6 +17,11 @@ namespace FreeAgent
             return client.GetOrCreateAsync(c => c.InvoiceList(client.Configuration.CurrentHeader, view.FilterValue, sort), r => r.Invoices); 
         }
 
+        public static Task<IEnumerable<Invoice>> ListInvoicesForContactAsync(this FreeAgentClient client, string contact)
+        {
+            return client.GetOrCreateAsync(c => c.ListInvoicesForContact(client.Configuration.CurrentHeader, contact), r => r.Invoices);
+        }
+
         public static Task<Invoice> CreateInvoice(this FreeAgentClient client, Invoice invoice)
         {
             return client.GetOrCreateAsync(c => c.CreateInvoice(client.Configuration.CurrentHeader, invoice.Wrap()), r => r.Invoice); 
