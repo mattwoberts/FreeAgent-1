@@ -16,6 +16,15 @@ namespace FreeAgent
 
             return client.GetOrCreateAsync(c => c.ContactList(client.Configuration.CurrentHeader, view, sort), r => r.Contacts); 
         }
+        
+        public static Task<IEnumerable<Contact>> GetContactsPageAsync(this FreeAgentClient client, ContactFilter filterBy = ContactFilter.All, ContactOrder orderBy = ContactOrder.Name, int page = 1)
+        {
+            var view = filterBy.GetMemberValue();
+            var sort = orderBy.GetMemberValue();
+
+            return client.GetOrCreateAsync(c => c.ContactPageList(client.Configuration.CurrentHeader, view, sort, page), r => r.Contacts); 
+        }
+        
 
         public static Task<Contact> CreateContactAsync(this FreeAgentClient client, Contact contact)
         {
@@ -43,6 +52,7 @@ namespace FreeAgent
         {
             return client.GetOrCreateAsync(c => c.GetContact(client.Configuration.CurrentHeader, contactId), r => r.Contact); 
         }
+        
 
         public static Task DeleteContactAsync(this FreeAgentClient client, Contact contact)
         {

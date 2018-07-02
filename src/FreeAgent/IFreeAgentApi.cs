@@ -94,14 +94,17 @@ namespace FreeAgent
         [Get("/contacts")]
         Task<ContactWrapper> ContactList([Header("Authorization")] string authorization, string view, string sort);
 
+        [Get("/contacts?page={page}&per_page=100")]
+        Task<ContactWrapper> ContactPageList([Header("Authorization")] string authorization, string view, string sort, int page = 1);
+        
         [Post("/contacts")]
         Task<ContactWrapper> CreateContact([Header("Authorization")] string authorization, [Body] ContactWrapper contact);
 
-        [Put("/contacts/{id}")]
-        Task UpdateContact([Header("Authorization")] string authorization, int id, [Body] ContactWrapper contact);
-
         [Get("/contacts/{id}")]
         Task<ContactWrapper> GetContact([Header("Authorization")] string authorization, int id);
+        
+        [Put("/contacts/{id}")]
+        Task UpdateContact([Header("Authorization")] string authorization, int id, [Body] ContactWrapper contact);
 
         [Delete("/contacts/{id}")]
         Task DeleteContact([Header("Authorization")] string authorization, int id);
@@ -143,7 +146,7 @@ namespace FreeAgent
         Task<InvoiceWrapper> InvoiceList([Header("Authorization")] string authorization, string view, string sort, bool nested_invoice_items = true);
 
         [Get("/invoices?contact={contact}")]
-        Task<InvoiceWrapper> ListInvoicesForContact([Header("Authorization")] string authorization, string contact);
+        Task<InvoiceWrapper> ListInvoicesForContact([Header("Authorization")] string authorization, Uri contact);
 
         [Post("/invoices")]
         Task<InvoiceWrapper> CreateInvoice([Header("Authorization")] string authorization, [Body] InvoiceWrapper invoice);

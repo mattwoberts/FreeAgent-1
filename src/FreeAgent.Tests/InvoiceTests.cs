@@ -82,9 +82,9 @@ namespace FreeAgent.Tests
             Assert.NotNull(contact);
 
 
-            var invoices = await this.Client.ListInvoicesForContactAsync(contact.Url.ToString());
+            var invoices = await this.Client.ListInvoicesForContactAsync(contact.Url);
             
-            Assert.That(invoices.Count(), Is.EqualTo(3));
+            Assert.That(invoices.Count(), Is.EqualTo(4));
         }
 
         [Test]

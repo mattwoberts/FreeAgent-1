@@ -20,6 +20,41 @@ namespace FreeAgent.Tests
         }
 
         [Test]
+        [Ignore("Only run this when you need loads of contacts")]
+        public async Task Can_Insert_120_Contacts()
+        {
+            for (int i = 0; i < 120; i++)
+            {
+                var contact = Helper.NewContact();
+
+                var result = await this.Client.CreateContactAsync(contact);
+                
+                // Rate limit throttle 
+                await Task.Delay(900);
+            }
+            
+        }
+        
+        [Test]
+        public async Task CanGetPagesOfContacts()
+        {
+            //Set up your freeagent dev account with 100+ contacts (use the above test to do it)
+            int pageNumber = 1;
+
+            var contacts = await this.Client.GetContactsPageAsync(ContactFilter.All, ContactOrder.Name, pageNumber);
+            
+            Assert.That(contacts.Count(), Is.EqualTo(100)); //Make sure the per_page parameter is working
+
+            pageNumber++;
+            
+             contacts = await this.Client.GetContactsPageAsync(ContactFilter.All, ContactOrder.Name, pageNumber);
+            
+            //Chances are you've got more than just the 120 we inserted
+            Assert.That(contacts.Count(), Is.GreaterThanOrEqualTo(20));
+ 
+        }
+
+        [Test]
         public async Task Contact_Create_Should_Return_Same_With_Url()
         {
             // arrange
