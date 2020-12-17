@@ -3,6 +3,7 @@ using Refit;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,6 +16,9 @@ namespace FreeAgent
 
         [Post("/token_endpoint")]
         Task<AccessResponse> RefreshAccessToken([Body(BodySerializationMethod.UrlEncoded)] AccessRequest request);
+        
+        [Post("/token_endpoint")]
+        Task<HttpResponseMessage> RefreshAccessTokenRaw([Body(BodySerializationMethod.UrlEncoded)] AccessRequest request);
 
         #endregion
 

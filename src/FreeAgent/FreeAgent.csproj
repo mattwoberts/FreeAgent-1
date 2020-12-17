@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard1.4</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <PackageId>FreeAgent.Timetastic</PackageId>
     <PackageVersion>0.3.3</PackageVersion>
     <Authors>Matt Roberts, Dave Parker</Authors>
@@ -12,7 +12,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Refit" Version="3.1.0" />
+    <PackageReference Include="Refit" Version="5.2.4" />
   </ItemGroup>
 
 </Project>

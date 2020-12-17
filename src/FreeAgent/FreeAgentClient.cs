@@ -7,6 +7,7 @@ using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Linq;
+using System.Net;
 
 namespace FreeAgent
 {
@@ -39,6 +40,7 @@ namespace FreeAgent
             {
                 JsonSerializerSettings = new JsonSerializerSettings
                 {
+                    
                     ContractResolver = new SnakeCasePropertyNamesContractResolver(),
                     Converters = { new StringEnumConverter() }
                 }
@@ -56,7 +58,16 @@ namespace FreeAgent
             }
             else
             {
-                this.FreeAgentApi = RestService.For<IFreeAgentApi>(rootUrl, refitSettings);
+                var handler = new HttpClientHandler
+                {
+                    AutomaticDecompression = DecompressionMethods.GZip
+                };
+                var client = new HttpClient(handler)
+                {
+                    BaseAddress = new Uri(rootUrl)
+                };
+                
+                this.FreeAgentApi = RestService.For<IFreeAgentApi>(client, refitSettings);
             }
         }
 
@@ -64,6 +75,7 @@ namespace FreeAgent
         {
             //TODO - safety stuff here??
             TWrapped result = await this.Execute(action);
+            
             return returns(result);
         }
 
@@ -136,10 +148,21 @@ namespace FreeAgent
                  RefreshToken = this.Configuration.RefreshToken
             };
 
-            var response = await this.FreeAgentApi.RefreshAccessToken(request);
+            try
+            {
+                 var response = await this.FreeAgentApi.RefreshAccessToken(request);
+                // var response = await this.FreeAgentApi.RefreshAccessTokenRaw(request);
+                //var content = await response.Content.ReadAsStringAsync();
 
-            this.Configuration.CurrentToken = response.AccessToken;
-            this.Configuration.CurrentTokenExpiry = currentDate.AddSeconds(response.ExpiresIn);
+                 this.Configuration.CurrentToken = response.AccessToken;
+                 this.Configuration.CurrentTokenExpiry = currentDate.AddSeconds(response.ExpiresIn);
+            }
+            catch (Exception e)
+            {
+                throw new FreeAgentException($"Error refreshing freeagent access token. Inner exception is {e.InnerException?.Message}", e);
+            }
+
+            
         }
 
         internal Uri ExtractUrl(IUrl model)
