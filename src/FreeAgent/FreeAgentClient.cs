@@ -43,7 +43,8 @@ namespace FreeAgent
                     
                     ContractResolver = new SnakeCasePropertyNamesContractResolver(),
                     Converters = { new StringEnumConverter() }
-                }
+                },
+                HttpMessageHandlerFactory = GetDefaultHttpClientHandler
             };
 
             // set the httpclient base address and configure the client
@@ -58,17 +59,16 @@ namespace FreeAgent
             }
             else
             {
-                var handler = new HttpClientHandler
-                {
-                    AutomaticDecompression = DecompressionMethods.GZip
-                };
-                var client = new HttpClient(handler)
-                {
-                    BaseAddress = new Uri(rootUrl)
-                };
-                
-                this.FreeAgentApi = RestService.For<IFreeAgentApi>(client, refitSettings);
+                this.FreeAgentApi = RestService.For<IFreeAgentApi>(rootUrl, refitSettings);
             }
+        }
+
+        private HttpMessageHandler GetDefaultHttpClientHandler()
+        {
+            return new HttpClientHandler
+            {
+                AutomaticDecompression = DecompressionMethods.GZip
+            };
         }
 
         internal async Task<TResult> GetOrCreateAsync<TResult,TWrapped>(Func<IFreeAgentApi, Task<TWrapped>> action, Func<TWrapped, TResult> returns)
